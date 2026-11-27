@@ -96,6 +96,8 @@ textarea{min-height:70px;resize:vertical}
 .brand{display:inline-block;margin-top:8px;color:var(--teal2);font-size:.8rem}
 [data-theme=dark] .brand{color:var(--gold)}
 .foot{font-size:.78rem;color:var(--muted);text-align:center;margin:18px 8px}
+.brand a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.footlinks{text-align:center;margin:0 8px 18px}.footlinks p{font-size:.85rem;margin:10px 0 0;line-height:1.9}.footlinks a{color:var(--teal2);white-space:nowrap}[data-theme=dark] .footlinks a{color:var(--gold)}
 .promo .tag{display:inline-block;background:var(--soft);border-radius:20px;padding:2px 10px;font-size:.72rem;margin-bottom:6px}
 .ob{position:fixed;inset:0;background:var(--bg);z-index:20;display:flex;flex-direction:column;justify-content:center;padding:24px;max-width:520px;margin:0 auto}
 .ob h2{font-size:1.5rem;margin:0 0 6px}
@@ -130,7 +132,9 @@ textarea{min-height:70px;resize:vertical}
     <section id="v-progress" class="hide"></section>
     <section id="v-audit" class="hide"></section>
     <section id="v-settings" class="hide"></section>
-    <p class="foot"><span id="footTxt">This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.</span><br><span class="brand">By <strong>Basheer Kazi</strong> · Growth with Purpose</span></p>
+    <p class="foot"><span id="footTxt">This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.</span><br><span class="brand">By <a href="https://basheerkazi.github.io/kazi-site/" target="_blank" rel="noopener"><strong>Basheer Kazi</strong></a> · Growth with Purpose</span></p>
+    <div class="footlinks noprint"><button class="btn" id="shareApp">Share this app</button>
+      <p><a id="lGuide" href="https://claude.ai/artifact/429gJdok8Q43T7g5MiHBbq" target="_blank" rel="noopener">Install guide</a> · <a id="lQr" href="launch/road-to-ramadan-qr.png" target="_blank" rel="noopener">QR code</a> · <a id="lPoster" href="launch/road-to-ramadan-poster.png" target="_blank" rel="noopener">Poster</a> · <a id="lPosterUr" href="launch/road-to-ramadan-poster-urdu.png" target="_blank" rel="noopener">Urdu poster</a></p></div>
   </main>
 </div>
 <nav class="tabs" id="tabs">
@@ -223,6 +227,7 @@ const UR = {
     'Road to Ramadan, पिछले 7 दिन: 7 में से {0} दिन दर्ज। औसत पाबंदी {2} में से {1}। नमाज़ें 35 में से {3}। क़ुरआन {4} मिनट, दीनी इल्म {5} मिनट, वरज़िश {6} मिनट।',
   'avg score this week': 'इस हफ़्ते का औसत', 'prayers this week': 'इस हफ़्ते की नमाज़ें', 'days in a row now': 'लगातार दिन', 'best run': 'सबसे लंबा सिलसिला',
   'Last 7 days': 'पिछले 7 दिन', 'Tap a day to open it. Breaks are fine. Resume at the next prayer.': 'दिन खोलने के लिए उस पर टैप करें। नाग़ा हो जाए तो कोई बात नहीं, अगली नमाज़ से फिर शुरू करें।',
+  'Share this app': 'यह ऐप शेयर करें', 'Install guide': 'इंस्टॉल गाइड', 'QR code': 'QR कोड', 'Poster': 'पोस्टर', 'Urdu poster': 'उर्दू पोस्टर', 'Link copied': 'लिंक कॉपी हो गया', 'A free, private daily planner for the weeks before Ramadan.': 'रमज़ान से पहले के हफ़्तों के लिए एक मुफ़्त, निजी डेली प्लानर।',
   'Share my week': 'मेरा हफ़्ता शेयर करें', 'Copy as text': 'टेक्स्ट कॉपी करें', 'Prayer calendar': 'नमाज़ कैलेंडर', 'Minutes per day': 'रोज़ाना मिनट',
   'Habit strength': 'आदतों की मज़बूती', 'Your four phases': 'आपके चार मरहले', 'Print or save as PDF': 'प्रिंट करें या PDF बनाएँ',
   'Qada fasts': 'क़ज़ा रोज़े', '{0} of {1} made up. {2} practice fasts.': '{1} में से {0} अदा। {2} नफ़्ल रोज़े।', '{0} qada and {1} practice fasts logged.': '{0} क़ज़ा और {1} नफ़्ल रोज़े दर्ज।',
@@ -844,6 +849,7 @@ const langSeg = () => `<div class="seg" data-seg="lang">${[['en', 'English'], ['
 function applyLang() {
   document.documentElement.lang = isUr() ? 'ur-Deva' : 'en';
   $('#footTxt').textContent = T('This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.');
+  [['#shareApp','Share this app'],['#lGuide','Install guide'],['#lQr','QR code'],['#lPoster','Poster'],['#lPosterUr','Urdu poster']].forEach(([id, t]) => { $(id).textContent = T(t); });
   document.querySelectorAll('#tabs button').forEach(b => { b.querySelector('span').textContent = T(b.dataset.v[0].toUpperCase() + b.dataset.v.slice(1)); });
 }
 function setLang(v) {
@@ -919,6 +925,11 @@ function show(v) {
   Object.keys(R).forEach(k => $('#v-' + k).classList.toggle('hide', k !== v));
   R[v](); window.scrollTo(0, 0);
 }
+$('#shareApp').onclick = async () => {
+  const url = 'https://basheerkazi.github.io/road-to-ramadan/', text = 'Road to Ramadan: ' + T('A free, private daily planner for the weeks before Ramadan.');
+  if (navigator.share) { try { await navigator.share({ title: 'Road to Ramadan', text, url }); return; } catch (e) { if (e.name === 'AbortError') return; } }
+  try { await navigator.clipboard.writeText(text + ' ' + url); toast(T('Link copied')); } catch (e) { prompt('Copy', url); }
+};
 $('#hero').addEventListener('click', ev => { if (ev.target.closest('#langBtn')) setLang(isUr() ? 'en' : 'ur'); });
 $('#tabs').addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) show(b.dataset.v); });
 $('#v-today').addEventListener('click', onTodayClick);
