@@ -130,14 +130,14 @@ textarea{min-height:70px;resize:vertical}
     <section id="v-progress" class="hide"></section>
     <section id="v-audit" class="hide"></section>
     <section id="v-settings" class="hide"></section>
-    <p class="foot">This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.<br><span class="brand">By <strong>Basheer Kazi</strong> · Growth with Purpose</span></p>
+    <p class="foot"><span id="footTxt">This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.</span><br><span class="brand">By <strong>Basheer Kazi</strong> · Growth with Purpose</span></p>
   </main>
 </div>
 <nav class="tabs" id="tabs">
-  <button data-v="today" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Today</button>
-  <button data-v="progress"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progress</button>
-  <button data-v="audit"><svg viewBox="0 0 24 24"><path d="M9 4h6M8 2h8v4H8zM6 4H5a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-1M8 12l3 3 5-5"/></svg>Audit</button>
-  <button data-v="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings</button>
+  <button data-v="today" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Today</span></button>
+  <button data-v="progress"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Progress</span></button>
+  <button data-v="audit"><svg viewBox="0 0 24 24"><path d="M9 4h6M8 2h8v4H8zM6 4H5a1 1 0 0 0-1 1v15a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-1M8 12l3 3 5-5"/></svg><span>Audit</span></button>
+  <button data-v="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>Settings</span></button>
 </nav>
 <div class="toast" id="toast"></div>
 <div id="ob"></div>
@@ -174,6 +174,106 @@ const AUDIT_QS = [
   'What is the one improvement I will make next week?'
 ];
 
+const UR = {
+  'Foundation and awareness': 'बुनियाद और आगाही', 'Discipline and learning': 'पाबंदी और इल्म', 'Character and responsibility': 'अख़लाक़ और ज़िम्मेदारी', 'Ramadan readiness': 'रमज़ान की तैयारी',
+  'Minimum': 'कम से कम', 'Standard': 'दरमियाना', 'Stretch': 'ज़्यादा',
+  'Fajr': 'फ़ज्र', 'Dhuhr': 'ज़ुहर', 'Asr': 'अस्र', 'Maghrib': 'मग़रिब', 'Isha': 'इशा',
+  'Qur’an': 'क़ुरआन', 'Islamic learning': 'दीनी इल्म', 'Movement': 'वरज़िश', 'Learning': 'इल्म',
+  'Dhikr, istighfar, salawat': 'ज़िक्र, इस्तिग़फ़ार, दुरूद', 'One character focus': 'एक अख़लाक़ी सुधार', 'Which weakness?': 'कौन सी कमज़ोरी?',
+  'Kindness or service': 'नेकी या ख़िदमत', 'Undivided family time': 'घरवालों के साथ पूरा वक़्त', 'Screen habits in check': 'स्क्रीन पर क़ाबू',
+  'Settled a pending matter': 'कोई रुका हुआ मामला निपटाया', 'Only if you want to note it': 'चाहें तो लिख लें',
+  'Did I protect my five daily prayers?': 'क्या मैंने अपनी पाँचों नमाज़ों की हिफ़ाज़त की?',
+  'Is my relationship with the Qur’an improving?': 'क्या क़ुरआन से मेरा रिश्ता बेहतर हो रहा है?',
+  'Am I becoming a calmer person?': 'क्या मेरे मिज़ाज में ठहराव आ रहा है?',
+  'Have I hurt anyone through my speech this week?': 'क्या इस हफ़्ते मेरी बात से किसी का दिल दुखा?',
+  'Did I fulfil my responsibilities toward my family?': 'क्या मैंने अपने घरवालों के हक़ अदा किए?',
+  'Was my income, conduct and dealing with people fair and honest?': 'क्या मेरी कमाई, बर्ताव और लोगों से लेन-देन ईमानदारी और इंसाफ़ वाला था?',
+  'What have I wasted time on?': 'मैंने किन चीज़ों में वक़्त ज़ाया किया?',
+  'What have I done purely for Allah that nobody else knows about?': 'मैंने सिर्फ़ अल्लाह के लिए ऐसा क्या किया जो किसी और को मालूम नहीं?',
+  'What have I avoided that I should have addressed?': 'किस बात को मैंने टाला जिसे सुलझाना चाहिए था?',
+  'What is the one improvement I will make next week?': 'अगले हफ़्ते मेरा एक सुधार क्या होगा?',
+  'Saved': 'सेव हो गया', 'Copied': 'कॉपी हो गया', 'Installed': 'इंस्टॉल हो गया', 'File saved': 'फ़ाइल सेव हो गई', 'Image saved': 'तस्वीर सेव हो गई',
+  'Storage is turned off in this browser, so entries will not be kept after you close the page.': 'इस ब्राउज़र में स्टोरेज बंद है, इसलिए पेज बंद करने के बाद एंट्रियाँ नहीं रहेंगी।',
+  ' Subject to moon sighting, it may be 10 Feb.': ' चाँद दिखने पर मुनहसिर है, 10 फ़रवरी भी हो सकता है।',
+  'Days': 'दिन', 'Hours': 'घंटे', 'Min': 'मिनट', 'Sec': 'सेकंड', 'until 1 Ramadan (expected)': '1 रमज़ान तक (अंदाज़न)',
+  'Ramadan has begun': 'रमज़ान शुरू हो गया', 'Your road is complete. Keep the habits you built.': 'आपका सफ़र पूरा हुआ। जो आदतें बनाईं, उन्हें क़ायम रखें।',
+  'Your plan starts on {0}. Ramadan is expected on {1}.': 'आपका प्लान {0} से शुरू होगा। रमज़ान अंदाज़न {1} को शुरू होगा।',
+  'Day {0} of {1}. Ramadan is expected on {2}.': 'दिन {0} (कुल {1})। रमज़ान अंदाज़न {2} को शुरू होगा।',
+  'Consistency {0} of {1}': 'पाबंदी {1} में से {0}', 'Consistency': 'पाबंदी',
+  'Start with one prayer. Small steps count.': 'एक नमाज़ से शुरू करें। छोटे क़दम भी गिने जाते हैं।', 'Good start. Keep going.': 'अच्छी शुरुआत। जारी रखें।',
+  'Steady day. Well done.': 'अच्छा दिन। शाबाश।', 'Strong day, almost full.': 'बहुत अच्छा दिन, लगभग पूरा।', 'Full day. Alhamdulillah.': 'पूरा दिन। अलहम्दुलिल्लाह।',
+  'Fasted today': 'आज रोज़ा रखा', 'Qada: {0} of {1} made up, {2} left': 'क़ज़ा: {1} में से {0} अदा, {2} बाक़ी', 'Set qada fasts owed in Settings': 'बाक़ी क़ज़ा रोज़े सेटिंग्स में लिखें',
+  'No': 'नहीं', 'Practice': 'नफ़्ल', 'Qada': 'क़ज़ा',
+  'Qur’an pages today': 'आज क़ुरआन के सफ़हे', 'Total {0} of {1} pages, about {2} juz': 'कुल {1} में से {0} सफ़हे, लगभग {2} पारे', 'Pages read': 'पढ़े गए सफ़हे',
+  'Sadaqah given': 'सदक़ा दिया', 'Count only. {0} so far': 'सिर्फ़ गिनती। अब तक {0}', 'Sadaqah count': 'सदक़े की गिनती',
+  'Sleep': 'नींद', '{0} hours': '{0} घंटे', 'Bedtime and wake time': 'सोने और उठने का वक़्त', 'Bed': 'सोना', 'Wake': 'उठना',
+  'Extra trackers': 'और ट्रैकर', 'not scored': 'स्कोर में नहीं', 'Today': 'आज', 'Older day': 'पिछला दिन',
+  'Out of {0}. It does not measure your iman.': '{0} में से। यह आपका ईमान नहीं नापता।',
+  'Prayers': 'नमाज़ें', 'Minutes': 'मिनट', 'Habits': 'आदतें', 'Notes': 'नोट्स', 'Target {0} min': 'हदफ़ {0} मिनट', '{0} minutes': '{0} मिनट',
+  'Anything about today': 'आज के बारे में कुछ भी', 'All five prayers. MashaAllah!': 'पाँचों नमाज़ें। माशाअल्लाह!',
+  'Minutes per day, last {0} days': 'रोज़ाना मिनट, पिछले {0} दिन', '{0}: {1} of 5 prayers': '{0}: 5 में से {1} नमाज़ें', '{0}, {1} of 5 prayers': '{0}, 5 में से {1} नमाज़ें',
+  'Fewer': 'कम', 'All 5 prayers': 'पाँचों नमाज़ें',
+  'Log a few days to see which habits are strongest.': 'कुछ दिन दर्ज करें, फिर देखें कौन सी आदत सबसे मज़बूत है।',
+  'Your strongest habit. Well done.': 'आपकी सबसे मज़बूत आदत। शाबाश।', 'Room to grow. Try a small step here this week.': 'यहाँ बेहतरी की गुंजाइश है। इस हफ़्ते एक छोटा क़दम उठाएँ।',
+  'Share of the {0} days you logged.': 'आपके दर्ज किए {0} दिनों में से।',
+  'Not started': 'अभी शुरू नहीं', 'Average {0} of {1}, {2} days logged': 'औसत {1} में से {0}, {2} दिन दर्ज', 'No days logged yet': 'अभी कोई दिन दर्ज नहीं', '{0} to {1}. {2}': '{0} से {1}। {2}',
+  'Road to Ramadan, last 7 days: logged {0} of 7 days. Average consistency {1} of {2}. Prayers {3} of 35. Qur\'an {4} minutes, learning {5} minutes, movement {6} minutes.':
+    'Road to Ramadan, पिछले 7 दिन: 7 में से {0} दिन दर्ज। औसत पाबंदी {2} में से {1}। नमाज़ें 35 में से {3}। क़ुरआन {4} मिनट, दीनी इल्म {5} मिनट, वरज़िश {6} मिनट।',
+  'avg score this week': 'इस हफ़्ते का औसत', 'prayers this week': 'इस हफ़्ते की नमाज़ें', 'days in a row now': 'लगातार दिन', 'best run': 'सबसे लंबा सिलसिला',
+  'Last 7 days': 'पिछले 7 दिन', 'Tap a day to open it. Breaks are fine. Resume at the next prayer.': 'दिन खोलने के लिए उस पर टैप करें। नाग़ा हो जाए तो कोई बात नहीं, अगली नमाज़ से फिर शुरू करें।',
+  'Share my week': 'मेरा हफ़्ता शेयर करें', 'Copy as text': 'टेक्स्ट कॉपी करें', 'Prayer calendar': 'नमाज़ कैलेंडर', 'Minutes per day': 'रोज़ाना मिनट',
+  'Habit strength': 'आदतों की मज़बूती', 'Your four phases': 'आपके चार मरहले', 'Print or save as PDF': 'प्रिंट करें या PDF बनाएँ',
+  'Qada fasts': 'क़ज़ा रोज़े', '{0} of {1} made up. {2} practice fasts.': '{1} में से {0} अदा। {2} नफ़्ल रोज़े।', '{0} qada and {1} practice fasts logged.': '{0} क़ज़ा और {1} नफ़्ल रोज़े दर्ज।',
+  'Qur’an pages': 'क़ुरआन के सफ़हे', '{0} of {1} pages, about {2} of 30 juz.': '{1} में से {0} सफ़हे, 30 में से लगभग {2} पारे।', 'Sadaqah given: {0}.': 'सदक़ा दिया: {0}।',
+  'Average sleep {0} hours over {1} nights this week.': 'इस हफ़्ते {1} रातों में औसत नींद {0} घंटे।', 'Log bedtime and wake time to see your sleep.': 'अपनी नींद देखने के लिए सोने और उठने का वक़्त दर्ज करें।',
+  '{0} dua on your Ramadan list.': 'आपकी रमज़ान लिस्ट में {0} दुआ।', '{0} duas on your Ramadan list.': 'आपकी रमज़ान लिस्ट में {0} दुआएँ।',
+  '{0} days to go': '{0} दिन बाक़ी', 'My last 7 days': 'मेरे पिछले 7 दिन', 'prayers': 'नमाज़ें', 'avg score': 'औसत स्कोर', 'Qur’an min': 'क़ुरआन मिनट',
+  'Free planner: basheerkazi.github.io/road-to-ramadan': 'मुफ़्त प्लानर: basheerkazi.github.io/road-to-ramadan', 'Get the AHILLA app': 'AHILLA ऐप लें', 'AHILLA app coming soon': 'AHILLA ऐप जल्द आ रहा है',
+  'My Road to Ramadan week': 'मेरा Road to Ramadan हफ़्ता',
+  'Sunday audit': 'इतवार का जायज़ा', '{0} of 10': '10 में से {0}',
+  'Week starting {0}. Answer honestly, in your own words. Only you see these.': '{0} से शुरू होने वाला हफ़्ता। ईमानदारी से, अपने अल्फ़ाज़ में जवाब दें। इन्हें सिर्फ़ आप देख सकते हैं।',
+  'My Ramadan dua list': 'मेरी रमज़ान दुआ लिस्ट', 'Build your list over the weeks, so you are ready for the nights of Ramadan.': 'हफ़्तों में अपनी लिस्ट बनाते रहें, ताकि रमज़ान की रातों के लिए तैयार रहें।',
+  'Add a dua': 'दुआ लिखें', 'Add': 'जोड़ें', 'Remove': 'हटाएँ', 'Remove?': 'हटाएँ?',
+  'From the makers': 'बनाने वालों की तरफ़ से', 'AHILLA app': 'AHILLA ऐप', 'Prayer times, Tahajjud alerts and full Ramadan tools in one app.': 'नमाज़ के औक़ात, तहज्जुद अलर्ट और रमज़ान के सारे टूल्स, एक ही ऐप में।',
+  ' Coming soon.': ' जल्द आ रहा है।', 'Open AHILLA': 'AHILLA खोलें',
+  'Your dates': 'आपकी तारीख़ें', 'Plan start': 'प्लान की शुरुआत', '1 Ramadan': '1 रमज़ान',
+  'The plan counts back from 1 Ramadan and is never longer than {0} days. Check the date with your local moon committee. The plan moves when you change it.': 'प्लान 1 रमज़ान से पीछे गिना जाता है और {0} दिन से लंबा नहीं होता। तारीख़ अपनी मक़ामी रूयत-ए-हिलाल कमेटी से पक्की करें। तारीख़ बदलेंगे तो प्लान भी बदल जाएगा।',
+  'Fasts (practice and qada)': 'रोज़े (नफ़्ल और क़ज़ा)', 'Sadaqah': 'सदक़ा', 'Dua list': 'दुआ लिस्ट', 'On': 'चालू', 'Off': 'बंद', 'Qada fasts I owe': 'मेरे बाक़ी क़ज़ा रोज़े',
+  'These help you prepare. They do not change your consistency score.': 'ये तैयारी में मदद करते हैं। इनसे आपका पाबंदी स्कोर नहीं बदलता।',
+  'Daily targets': 'रोज़ाना हदफ़', 'Minimum, Standard and Stretch. Pick what you can keep up, not what looks impressive.': 'कम से कम, दरमियाना और ज़्यादा। वह चुनें जो निभा सकें, वह नहीं जो सिर्फ़ अच्छा दिखे।',
+  'Look': 'दिखावट', 'Language': 'ज़बान', 'Theme': 'थीम', 'Auto': 'ऑटो', 'Light': 'लाइट', 'Dark': 'डार्क', 'Text size': 'लिखावट का साइज़',
+  'Install as an app': 'ऐप की तरह इंस्टॉल करें', 'Install Road to Ramadan': 'Road to Ramadan इंस्टॉल करें',
+  'Installed. You are using the app version.': 'इंस्टॉल हो गया। आप ऐप वर्ज़न इस्तेमाल कर रहे हैं।',
+  'Add it to your home screen or desktop. It opens like an app and works offline.': 'इसे होम स्क्रीन या डेस्कटॉप पर जोड़ें। यह ऐप की तरह खुलता है और बिना इंटरनेट भी चलता है।',
+  'On iPhone: tap the Share button in Safari, then “Add to Home Screen”.': 'आईफ़ोन पर: Safari में Share बटन दबाएँ, फिर “Add to Home Screen” चुनें।',
+  'In Chrome or Edge, open the browser menu and choose “Install app” or “Add to Home screen”.': 'Chrome या Edge में ब्राउज़र मेनू खोलें और “Install app” या “Add to Home screen” चुनें।',
+  'Daily reminder': 'रोज़ाना याददिहानी', 'Adds a repeating daily reminder to your phone calendar, until Ramadan. Pick a time, then open the file.': 'रमज़ान तक आपके फ़ोन कैलेंडर में रोज़ की याददिहानी जोड़ता है। वक़्त चुनें, फिर फ़ाइल खोलें।',
+  'Time': 'वक़्त', 'Add to calendar': 'कैलेंडर में जोड़ें',
+  'Your data': 'आपका डेटा', 'Everything stays on this device. Save a backup file before you change or reset your phone, then restore it on the new one.': 'सब कुछ इसी डिवाइस पर रहता है। फ़ोन बदलने या रीसेट करने से पहले बैकअप फ़ाइल सेव करें, फिर नए फ़ोन पर रिस्टोर करें।',
+  'Save backup': 'बैकअप सेव करें', 'Restore backup': 'बैकअप रिस्टोर करें', 'Last backup: {0}': 'पिछला बैकअप: {0}', 'No backup saved yet.': 'अभी कोई बैकअप नहीं।',
+  'Show export (CSV)': 'एक्सपोर्ट दिखाएँ (CSV)', 'Copy CSV': 'CSV कॉपी करें',
+  'Clear': 'मिटाएँ', 'Clear selected day': 'चुना हुआ दिन मिटाएँ', 'Clear everything': 'सब कुछ मिटाएँ', 'Clearing needs a second tap to confirm.': 'मिटाने के लिए दोबारा टैप करना होगा।',
+  'Tap again to clear {0}.': '{0} मिटाने के लिए फिर टैप करें।', 'Day cleared.': 'दिन मिट गया।', 'Tap again to erase every entry on this device.': 'इस डिवाइस की हर एंट्री मिटाने के लिए फिर टैप करें।',
+  'Everything cleared.': 'सब कुछ मिट गया।', 'Show the welcome again': 'वेलकम फिर दिखाएँ',
+  'Backup saved. Keep the file somewhere safe, such as Google Drive.': 'बैकअप सेव हो गया। फ़ाइल किसी महफ़ूज़ जगह रखें, जैसे Google Drive।',
+  'That file is not a Road to Ramadan backup.': 'यह Road to Ramadan का बैकअप नहीं है।',
+  'Restore {0} days from this backup? It replaces what is on this device now.': 'इस बैकअप से {0} दिन रिस्टोर करें? इस डिवाइस का मौजूदा डेटा बदल जाएगा।', 'Restored {0} days': '{0} दिन रिस्टोर हुए',
+  'Road to Ramadan check-in': 'Road to Ramadan: आज का हिसाब', 'Two minutes to log today.': 'आज दर्ज करने में दो मिनट।',
+  'Assalamu alaikum 🌙': 'अस्सलामु अलैकुम 🌙',
+  'Road to Ramadan helps you build steady habits before Ramadan, a little each day. Everything stays on this phone.': 'Road to Ramadan रमज़ान से पहले रोज़ थोड़ा-थोड़ा करके पक्की आदतें बनाने में मदद करता है। सब कुछ इसी फ़ोन पर रहता है।',
+  'When does Ramadan start for you?': 'आपके यहाँ रमज़ान कब शुरू होगा?', 'Expected 9 Feb 2027 in India, subject to moon sighting. You can change it later.': 'भारत में अंदाज़न 9 फ़रवरी 2027, चाँद दिखने पर मुनहसिर। बाद में बदल सकते हैं।',
+  'When do you start?': 'आप कब से शुरू करेंगे?', 'Today is fine. The plan is at most {0} days, counted back from Ramadan.': 'आज से भी ठीक है। प्लान ज़्यादा से ज़्यादा {0} दिन का है, रमज़ान से पीछे गिना हुआ।',
+  'Pick your pace': 'अपनी रफ़्तार चुनें', 'Daily minutes for Qur’an, learning and movement. Change it any time.': 'क़ुरआन, इल्म और वरज़िश के रोज़ाना मिनट। जब चाहें बदलें।',
+  'Qur’an {0} · Learning {1} · Movement {2} min': 'क़ुरआन {0} · इल्म {1} · वरज़िश {2} मिनट', 'Back': 'पीछे', 'Next': 'आगे', 'Start my road': 'मेरा सफ़र शुरू करें',
+  'Bismillah. Your road starts now.': 'बिस्मिल्लाह। आपका सफ़र अब शुरू।',
+  'This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.': 'यह पाबंदी का एक टूल है, आपके ईमान या क़द्र का पैमाना नहीं। कोई दिन छूट गया? अगली नमाज़ से फिर शुरू करें।',
+  'Progress': 'तरक़्क़ी', 'Audit': 'जायज़ा', 'Settings': 'सेटिंग्स'
+};
+const UR_M = ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
+const UR_W = ['इतवार', 'पीर', 'मंगल', 'बुध', 'जुमेरात', 'जुमा', 'हफ़्ता'];
+const isUr = () => !!(mem.settings && mem.settings.lang === 'ur');
+const T = (str, ...a) => ((isUr() && UR[str]) || str).replace(/\{(\d)\}/g, (_, i) => a[i]);
+
 const $ = s => document.querySelector(s);
 const pad = n => String(n).padStart(2, '0');
 const ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
@@ -181,7 +281,10 @@ const parse = s => { const [y, m, d] = s.split('-').map(Number); return new Date
 const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
 const diff = (a, b) => Math.round((b - a) / 86400000);
 const todayD = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
-const fmtD = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const fmtD = d => isUr() ? `${d.getDate()} ${UR_M[d.getMonth()]} ${d.getFullYear()}` : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const wdS = d => isUr() ? UR_W[d.getDay()] : d.toLocaleDateString('en-GB', { weekday: 'short' });
+const fmtWDM = d => isUr() ? `${UR_W[d.getDay()]}, ${d.getDate()} ${UR_M[d.getMonth()]}` : d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+const fmtWD = d => isUr() ? `${UR_W[d.getDay()]} ${d.getDate()}` : d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 let mem = {}, storageOK = true, curKey = ymd(todayD()), view = 'today';
@@ -192,7 +295,7 @@ function load() {
   try { raw = localStorage.getItem(KEY); localStorage.setItem(KEY + '-t', '1'); localStorage.removeItem(KEY + '-t'); } catch (e) { storageOK = false; }
   try { mem = JSON.parse(raw) || {}; } catch (e) { mem = {}; }
   const existing = !!mem.settings;
-  mem.settings = Object.assign({ start: ymd(todayD()), ramadan: DEFAULT_RAMADAN, theme: 'auto', fs: 16 }, mem.settings || {});
+  mem.settings = Object.assign({ start: ymd(todayD()), ramadan: DEFAULT_RAMADAN, theme: 'auto', fs: 16, lang: 'en' }, mem.settings || {});
   mem.settings.levels = Object.assign({ qur: 1, learn: 1, exercise: 1 }, mem.settings.levels || {});
   if (mem.settings.onboarded === undefined) mem.settings.onboarded = existing;   // earlier users skip the welcome
   mem.days = mem.days || {};
@@ -205,14 +308,14 @@ let saveTimer;
 function save(quiet) {
   if (!storageOK) return;
   try { localStorage.setItem(KEY, JSON.stringify(mem)); } catch (e) { storageOK = false; renderWarn(); return; }
-  if (!quiet) { clearTimeout(saveTimer); saveTimer = setTimeout(() => toast('Saved'), 350); }
+  if (!quiet) { clearTimeout(saveTimer); saveTimer = setTimeout(() => toast(T('Saved')), 350); }
 }
 function toast(msg) {
   const t = $('#toast'); t.textContent = msg; t.classList.add('show');
   clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 1400);
 }
 function renderWarn() {
-  $('#storeWarn').innerHTML = storageOK ? '' : '<div class="notice">Storage is turned off in this browser, so entries will not be kept after you close the page.</div>';
+  $('#storeWarn').innerHTML = storageOK ? '' : '<div class="notice">' + T('Storage is turned off in this browser, so entries will not be kept after you close the page.') + '</div>';
 }
 
 /* ---------- Entries and score ---------- */
@@ -240,12 +343,12 @@ function planInfo() {
   const phase = Math.min(3, Math.floor(Math.max(idx - 1, 0) * 4 / total));
   return { start, ram, total, today, idx, state, phase, left: diff(today, ram) };
 }
-const moonNote = () => mem.settings.ramadan === DEFAULT_RAMADAN ? ' Subject to moon sighting, it may be 10 Feb.' : '';
+const moonNote = () => mem.settings.ramadan === DEFAULT_RAMADAN ? T(' Subject to moon sighting, it may be 10 Feb.') : '';
 
 /* ---------- Hero ---------- */
 function countdownHTML() {
-  return `<div class="cd" id="cd" aria-live="off">${['Days', 'Hours', 'Min', 'Sec'].map(l => `<div><b>0</b><span>${l}</span></div>`).join('')}</div>
-    <div class="cdl">until 1 Ramadan (expected)</div>`;
+  return `<div class="cd" id="cd" aria-live="off">${['Days', 'Hours', 'Min', 'Sec'].map(l => `<div><b>0</b><span>${T(l)}</span></div>`).join('')}</div>
+    <div class="cdl">${T('until 1 Ramadan (expected)')}</div>`;
 }
 function tickCountdown() {
   const el = document.getElementById('cd'); if (!el) return;
@@ -259,23 +362,23 @@ function renderHero() {
   const p = planInfo();
   let body;
   if (p.state === 'after') {
-    body = `<h1>Ramadan has begun</h1><p>Your road is complete. Keep the habits you built.</p>`;
+    body = `<h1>${T('Ramadan has begun')}</h1><p>${T('Your road is complete. Keep the habits you built.')}</p>`;
   } else if (p.state === 'before') {
-    body = `${countdownHTML()}<p>Your plan starts on ${fmtD(p.start)}. Ramadan is expected on ${fmtD(p.ram)}.${moonNote()}</p>`;
+    body = `${countdownHTML()}<p>${T('Your plan starts on {0}. Ramadan is expected on {1}.', fmtD(p.start), fmtD(p.ram))}${moonNote()}</p>`;
   } else {
     const pct = Math.round(p.idx / p.total * 100);
-    body = `<span class="pill">${PHASES[p.phase]}</span>${countdownHTML()}
-      <p>Day ${p.idx} of ${p.total}. Ramadan is expected on ${fmtD(p.ram)}.${moonNote()}</p>
+    body = `<span class="pill">${T(PHASES[p.phase])}</span>${countdownHTML()}
+      <p>${T('Day {0} of {1}. Ramadan is expected on {2}.', p.idx, p.total, fmtD(p.ram))}${moonNote()}</p>
       <div class="pbar"><i style="width:${pct}%"></i></div>`;
   }
   setTimeout(tickCountdown, 0);
-  $('#hero').innerHTML = `<div class="top"><span>Road to Ramadan · Basheer Kazi</span><span>${todayD().toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span></div>${body}`;
+  $('#hero').innerHTML = `<div class="top"><span>Road to Ramadan · Basheer Kazi</span><button class="pill" id="langBtn" style="border:0;color:#fff" lang="${isUr() ? 'en' : 'ur-Deva'}">${isUr() ? 'English' : 'उर्दू'}</button><span>${fmtWDM(todayD())}</span></div>${body}`;
 }
 
 /* ---------- Today ---------- */
 function ringSVG(s) {
   const r = 36, c = 2 * Math.PI * r, off = c * (1 - s / MAX_SCORE);
-  return `<svg class="ring" viewBox="0 0 84 84" role="img" aria-label="Consistency ${s} of ${MAX_SCORE}">
+  return `<svg class="ring" viewBox="0 0 84 84" role="img" aria-label="${T('Consistency {0} of {1}', s, MAX_SCORE)}">
     <circle class="bgc" cx="42" cy="42" r="${r}"/><circle class="fg" id="ringFg" cx="42" cy="42" r="${r}" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/>
     <text x="42" y="49" text-anchor="middle" id="ringTxt">${s}</text></svg>`;
 }
@@ -285,7 +388,7 @@ function updateRing(e) {
   const t = $('#ringTxt'); if (t) t.textContent = s;
   const m = $('#ringMsg'); if (m) m.textContent = ringMsg(s);
 }
-const ringMsg = s => s === 0 ? 'Start with one prayer. Small steps count.' : s < 6 ? 'Good start. Keep going.' : s < 11 ? 'Steady day. Well done.' : s < MAX_SCORE ? 'Strong day, almost full.' : 'Full day. Alhamdulillah.';
+const ringMsg = s => T(s === 0 ? 'Start with one prayer. Small steps count.' : s < 6 ? 'Good start. Keep going.' : s < 11 ? 'Steady day. Well done.' : s < MAX_SCORE ? 'Strong day, almost full.' : 'Full day. Alhamdulillah.');
 
 /* ---------- Extra trackers (do not change the score) ---------- */
 const QURAN_PAGES = 604;
@@ -301,25 +404,25 @@ function totals() {
   return { qada, practice, pages, sadaqah };
 }
 function extrasCard(e) {
-  const X = mem.settings.extras, T = totals(), parts = [];
+  const X = mem.settings.extras, N = totals(), parts = [];
   if (X.fast) {
-    const owed = mem.settings.qadaOwed, left = Math.max(owed - T.qada, 0);
-    parts.push(`<div class="minute"><span class="lbl">🍽️ Fasted today<small>${owed ? `Qada: ${T.qada} of ${owed} made up, ${left} left` : 'Set qada fasts owed in Settings'}</small></span>
-      <div class="seg" style="min-width:190px">${[['', 'No'], ['practice', 'Practice'], ['qada', 'Qada']].map(([v, l]) => `<button data-fast="${v}" class="${e.fast === v ? 'on' : ''}">${l}</button>`).join('')}</div></div>`);
+    const owed = mem.settings.qadaOwed, left = Math.max(owed - N.qada, 0);
+    parts.push(`<div class="minute"><span class="lbl">🍽️ ${T('Fasted today')}<small>${owed ? T('Qada: {0} of {1} made up, {2} left', N.qada, owed, left) : T('Set qada fasts owed in Settings')}</small></span>
+      <div class="seg" style="min-width:190px">${[['', 'No'], ['practice', 'Practice'], ['qada', 'Qada']].map(([v, l]) => `<button data-fast="${v}" class="${e.fast === v ? 'on' : ''}">${T(l)}</button>`).join('')}</div></div>`);
   }
   if (X.pages) {
-    const juz = Math.min(30, Math.floor(T.pages / 20.13));
-    parts.push(`<div class="minute"><span class="lbl">📗 Qur’an pages today<small>Total ${T.pages} of ${QURAN_PAGES} pages, about ${juz} juz</small></span>
-      <input class="val" type="number" inputmode="numeric" min="0" data-cnt="pages" value="${e.pages || ''}" placeholder="0" aria-label="Pages read">
+    const juz = Math.min(30, Math.floor(N.pages / 20.13));
+    parts.push(`<div class="minute"><span class="lbl">📗 ${T('Qur’an pages today')}<small>${T('Total {0} of {1} pages, about {2} juz', N.pages, QURAN_PAGES, juz)}</small></span>
+      <input class="val" type="number" inputmode="numeric" min="0" data-cnt="pages" value="${e.pages || ''}" placeholder="0" aria-label="${T('Pages read')}">
       <button class="chip" data-inc="pages" data-n="1">+1</button><button class="chip" data-inc="pages" data-n="5">+5</button></div>`);
   }
-  if (X.sadaqah) parts.push(`<div class="minute"><span class="lbl">💝 Sadaqah given<small>Count only. ${T.sadaqah} so far</small></span>
-      <input class="val" type="number" inputmode="numeric" min="0" data-cnt="sadaqah" value="${e.sadaqah || ''}" placeholder="0" aria-label="Sadaqah count">
+  if (X.sadaqah) parts.push(`<div class="minute"><span class="lbl">💝 ${T('Sadaqah given')}<small>${T('Count only. {0} so far', N.sadaqah)}</small></span>
+      <input class="val" type="number" inputmode="numeric" min="0" data-cnt="sadaqah" value="${e.sadaqah || ''}" placeholder="0" aria-label="${T('Sadaqah count')}">
       <button class="chip" data-inc="sadaqah" data-n="1">+1</button></div>`);
-  if (X.sleep) parts.push(`<div class="minute"><span class="lbl">😴 Sleep<small id="sleepHrs">${sleepHours(e) ? sleepHours(e) + ' hours' : 'Bedtime and wake time'}</small></span>
-      <div style="display:flex;gap:8px;width:100%"><label class="muted" style="flex:1">Bed<input type="time" data-txt="bed" value="${e.bed}"></label><label class="muted" style="flex:1">Wake<input type="time" data-txt="wake" value="${e.wake}"></label></div></div>`);
+  if (X.sleep) parts.push(`<div class="minute"><span class="lbl">😴 ${T('Sleep')}<small id="sleepHrs">${sleepHours(e) ? T('{0} hours', sleepHours(e)) : T('Bedtime and wake time')}</small></span>
+      <div style="display:flex;gap:8px;width:100%"><label class="muted" style="flex:1">${T('Bed')}<input type="time" data-txt="bed" value="${e.bed}"></label><label class="muted" style="flex:1">${T('Wake')}<input type="time" data-txt="wake" value="${e.wake}"></label></div></div>`);
   if (!parts.length) return '';
-  return `<div class="card"><div class="h">Extra trackers <span class="muted" style="font-weight:400">not scored</span></div>${parts.join('')}</div>`;
+  return `<div class="card"><div class="h">${T('Extra trackers')} <span class="muted" style="font-weight:400">${T('not scored')}</span></div>${parts.join('')}</div>`;
 }
 
 function renderToday() {
@@ -327,35 +430,35 @@ function renderToday() {
   let strip = '';
   for (let i = 6; i >= 0; i--) {
     const d = addDays(today, -i), k = ymd(d), has = mem.days[k] && hasEntry(getEntry(k));
-    strip += `<button data-day="${k}" class="${k === curKey ? 'sel' : ''}">${d.toLocaleDateString('en-GB', { weekday: 'short' })}<b>${d.getDate()}</b><span class="dot ${has ? 'has' : ''}"></span></button>`;
+    strip += `<button data-day="${k}" class="${k === curKey ? 'sel' : ''}">${wdS(d)}<b>${d.getDate()}</b><span class="dot ${has ? 'has' : ''}"></span></button>`;
   }
   const isToday = curKey === ymd(today);
-  const prayers = PRAYERS.map(([k, n, ic]) => `<button class="tile ${e.pr[k] ? 'on' : ''}" data-pr="${k}" aria-pressed="${!!e.pr[k]}"><span class="ic">${ic}</span>${n}</button>`).join('');
+  const prayers = PRAYERS.map(([k, n, ic]) => `<button class="tile ${e.pr[k] ? 'on' : ''}" data-pr="${k}" aria-pressed="${!!e.pr[k]}"><span class="ic">${ic}</span>${T(n)}</button>`).join('');
   const minutes = MINUTES.map(([k, n, ic]) => {
     const t = TARGETS[k][L[k]];
-    return `<div class="minute"><span class="lbl">${ic} ${n}<small>Target ${t} min</small></span>
-      <input class="val ${e[k] >= t ? 'hit' : ''}" type="number" inputmode="numeric" min="0" data-min="${k}" value="${e[k] || ''}" placeholder="0" aria-label="${n} minutes">
+    return `<div class="minute"><span class="lbl">${ic} ${T(n)}<small>${T('Target {0} min', t)}</small></span>
+      <input class="val ${e[k] >= t ? 'hit' : ''}" type="number" inputmode="numeric" min="0" data-min="${k}" value="${e[k] || ''}" placeholder="0" aria-label="${T('{0} minutes', T(n))}">
       <button class="chip" data-add="${k}" data-n="5">+5</button><button class="chip" data-add="${k}" data-n="15">+15</button></div>`;
   }).join('');
-  const habits = HABITS.map(([k, n, ic]) => `<button class="tile ${e[k] ? 'on' : ''}" data-hb="${k}" aria-pressed="${!!e[k]}"><span class="ic">${ic}</span>${n}</button>`).join('');
-  const notes = HABITS.filter(h => h[3]).map(([k, n, , nk, ph]) => `<input type="text" class="sub ${e[k] ? '' : 'hide'}" id="note-${nk}" data-txt="${nk}" placeholder="${n}: ${ph}" value="${esc(e[nk])}">`).join('');
+  const habits = HABITS.map(([k, n, ic]) => `<button class="tile ${e[k] ? 'on' : ''}" data-hb="${k}" aria-pressed="${!!e[k]}"><span class="ic">${ic}</span>${T(n)}</button>`).join('');
+  const notes = HABITS.filter(h => h[3]).map(([k, n, , nk, ph]) => `<input type="text" class="sub ${e[k] ? '' : 'hide'}" id="note-${nk}" data-txt="${nk}" placeholder="${T(n)}: ${T(ph)}" value="${esc(e[nk])}">`).join('');
   $('#v-today').innerHTML = `
     <div class="card">
       <div class="strip">${strip}</div>
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <span class="muted">${isToday ? 'Today' : fmtD(parse(curKey))}</span>
-        <button class="linkbtn" id="pickBtn">Older day</button>
+        <span class="muted">${isToday ? T('Today') : fmtD(parse(curKey))}</span>
+        <button class="linkbtn" id="pickBtn">${T('Older day')}</button>
       </div>
       <input type="date" id="pick" class="hide" value="${curKey}" max="${ymd(today)}">
     </div>
     <div class="card"><div class="scorewrap">${ringSVG(score(e))}
-      <div><div class="h" style="margin:0">Consistency</div><div class="muted" id="ringMsg">${ringMsg(score(e))}</div>
-      <div class="muted">Out of ${MAX_SCORE}. It does not measure your iman.</div></div></div></div>
-    <div class="card"><div class="h">Prayers</div><div class="prayers">${prayers}</div></div>
-    <div class="card"><div class="h">Minutes</div>${minutes}</div>
-    <div class="card"><div class="h">Habits</div><div class="habits">${habits}</div>${notes}</div>
+      <div><div class="h" style="margin:0">${T('Consistency')}</div><div class="muted" id="ringMsg">${ringMsg(score(e))}</div>
+      <div class="muted">${T('Out of {0}. It does not measure your iman.', MAX_SCORE)}</div></div></div></div>
+    <div class="card"><div class="h">${T('Prayers')}</div><div class="prayers">${prayers}</div></div>
+    <div class="card"><div class="h">${T('Minutes')}</div>${minutes}</div>
+    <div class="card"><div class="h">${T('Habits')}</div><div class="habits">${habits}</div>${notes}</div>
     ${extrasCard(e)}
-    <div class="card"><div class="h">Notes</div><textarea data-txt="notes" placeholder="Anything about today">${esc(e.notes)}</textarea></div>
+    <div class="card"><div class="h">${T('Notes')}</div><textarea data-txt="notes" placeholder="${T('Anything about today')}">${esc(e.notes)}</textarea></div>
     ${promoCard()}`;
 }
 
@@ -378,7 +481,7 @@ function onTodayClick(ev) {
     const k = b.dataset.pr; e.pr[k] = !e.pr[k];
     b.classList.toggle('on', e.pr[k]); b.setAttribute('aria-pressed', e.pr[k]);
     putEntry(e); updateRing(e);
-    if (e.pr[k] && PRAYERS.every(p => e.pr[p[0]])) { burst(b); setTimeout(() => toast('All five prayers. MashaAllah!'), 400); }
+    if (e.pr[k] && PRAYERS.every(p => e.pr[p[0]])) { burst(b); setTimeout(() => toast(T('All five prayers. MashaAllah!')), 400); }
     refreshStripDot(e);
   } else if (b.dataset.hb) {
     const k = b.dataset.hb; e[k] = !e[k];
@@ -410,7 +513,7 @@ function onTodayInput(ev) {
   } else if (t.dataset.cnt) e[t.dataset.cnt] = Math.max(0, Math.round(Number(t.value) || 0));
   else if (t.dataset.txt) e[t.dataset.txt] = t.value;
   else return;
-  if (t.dataset.txt === 'bed' || t.dataset.txt === 'wake') { const h = sleepHours(e); $('#sleepHrs').textContent = h ? h + ' hours' : 'Bedtime and wake time'; }
+  if (t.dataset.txt === 'bed' || t.dataset.txt === 'wake') { const h = sleepHours(e); $('#sleepHrs').textContent = h ? T('{0} hours', h) : T('Bedtime and wake time'); }
   putEntry(e); updateRing(e); refreshStripDot(e);
 }
 function onTodayChange(ev) {
@@ -432,13 +535,13 @@ function reportRange() {
   return days;
 }
 function trendSVG(days) {
-  const W = 320, H = 150, L = 28, B = 22, T = 8, last = days.slice(-14);
+  const W = 320, H = 150, L = 28, B = 22, TP = 8, last = days.slice(-14);
   const series = [['qur', 'Qur’an', 'var(--teal2)'], ['learn', 'Learning', 'var(--gold)'], ['exercise', 'Movement', '#c0674f']];
   let max = 10;
   last.forEach(d => { const e = getEntry(ymd(d)); series.forEach(s => { max = Math.max(max, e[s[0]] || 0); }); });
   max = Math.ceil(max / 10) * 10;
   const x = i => L + (last.length < 2 ? 0 : i * (W - L - 6) / (last.length - 1));
-  const y = v => T + (H - T - B) * (1 - v / max);
+  const y = v => TP + (H - TP - B) * (1 - v / max);
   let g = '';
   [0, max / 2, max].forEach(v => { g += `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L - 4}" y="${y(v) + 4}" text-anchor="end" font-size="10" fill="var(--muted)">${v}</text>`; });
   last.forEach((d, i) => { if (i % 3 === 0 || i === last.length - 1) g += `<text x="${x(i)}" y="${H - 6}" text-anchor="middle" font-size="10" fill="var(--muted)">${d.getDate()}</text>`; });
@@ -446,30 +549,30 @@ function trendSVG(days) {
     const pts = last.map((d, i) => `${x(i).toFixed(1)},${y(getEntry(ymd(d))[k] || 0).toFixed(1)}`).join(' ');
     return `<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
   }).join('');
-  const legend = series.map(([k, n, c]) => `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px"><i style="width:14px;height:3px;border-radius:2px;background:${c}"></i>${n}</span>`).join('');
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Minutes per day, last ${last.length} days">${g}${lines}</svg><div class="muted">${legend}</div>`;
+  const legend = series.map(([k, n, c]) => `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px"><i style="width:14px;height:3px;border-radius:2px;background:${c}"></i>${T(n)}</span>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${T('Minutes per day, last {0} days', last.length)}">${g}${lines}</svg><div class="muted">${legend}</div>`;
 }
 function heatmap(days) {
   const first = days[0], lead = first.getDay();
-  let cells = '<div class="hm">' + ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => `<span class="hd">${d}</span>`).join('');
+  let cells = '<div class="hm">' + (isUr() ? ['इत', 'पीर', 'मं', 'बुध', 'जुमे', 'जुमा', 'हफ़्'] : ['S', 'M', 'T', 'W', 'T', 'F', 'S']).map(d => `<span class="hd">${d}</span>`).join('');
   for (let i = 0; i < lead; i++) cells += '<span></span>';
   days.forEach(d => {
     const k = ymd(d), e = getEntry(k), n = PRAYERS.filter(p => e.pr[p[0]]).length;
-    cells += `<button data-open="${k}" class="hc" style="--a:${n / 5}" title="${fmtD(d)}: ${n} of 5 prayers" aria-label="${fmtD(d)}, ${n} of 5 prayers">${d.getDate()}</button>`;
+    cells += `<button data-open="${k}" class="hc" style="--a:${n / 5}" title="${T('{0}: {1} of 5 prayers', fmtD(d), n)}" aria-label="${T('{0}, {1} of 5 prayers', fmtD(d), n)}">${d.getDate()}</button>`;
   });
-  return cells + '</div><div class="muted hmk">Fewer <i style="--a:0"></i><i style="--a:.4"></i><i style="--a:.8"></i><i style="--a:1"></i> All 5 prayers</div>';
+  return cells + `</div><div class="muted hmk">${T('Fewer')} <i style="--a:0"></i><i style="--a:.4"></i><i style="--a:.8"></i><i style="--a:1"></i> ${T('All 5 prayers')}</div>`;
 }
 function habitStrength(days) {
   const logged = days.map(d => getEntry(ymd(d))).filter(hasEntry), L = mem.settings.levels;
-  if (!logged.length) return '<p class="muted">Log a few days to see which habits are strongest.</p>';
+  if (!logged.length) return `<p class="muted">${T('Log a few days to see which habits are strongest.')}</p>`;
   const items = [
-    ...PRAYERS.map(([k, n, ic]) => [ic + ' ' + n, e => e.pr[k]]),
-    ...MINUTES.map(([k, n, ic]) => [ic + ' ' + n, e => e[k] >= TARGETS[k][L[k]]]),
-    ...HABITS.map(([k, n, ic]) => [ic + ' ' + n, e => e[k]])
+    ...PRAYERS.map(([k, n, ic]) => [ic + ' ' + T(n), e => e.pr[k]]),
+    ...MINUTES.map(([k, n, ic]) => [ic + ' ' + T(n), e => e[k] >= TARGETS[k][L[k]]]),
+    ...HABITS.map(([k, n, ic]) => [ic + ' ' + T(n), e => e[k]])
   ].map(([n, f]) => [n, Math.round(logged.filter(f).length / logged.length * 100)]).sort((a, b) => b[1] - a[1]);
   const row = ([n, v], tag) => `<div class="wk" style="cursor:default"><span class="l" style="width:150px">${n}</span><span class="b"><i style="width:${v}%"></i></span><span class="s">${v}%</span></div>${tag ? `<div class="muted" style="margin:-4px 0 4px">${tag}</div>` : ''}`;
-  return items.map((it, i) => row(it, i === 0 ? 'Your strongest habit. Well done.' : (i === items.length - 1 && it[1] < 100 ? 'Room to grow. Try a small step here this week.' : ''))).join('')
-    + `<p class="muted">Share of the ${logged.length} days you logged.</p>`;
+  return items.map((it, i) => row(it, i === 0 ? T('Your strongest habit. Well done.') : (i === items.length - 1 && it[1] < 100 ? T('Room to grow. Try a small step here this week.') : ''))).join('')
+    + `<p class="muted">${T('Share of the {0} days you logged.', logged.length)}</p>`;
 }
 function phaseReport() {
   const p = planInfo(), per = p.total / 4;
@@ -477,10 +580,10 @@ function phaseReport() {
     const s = addDays(p.start, Math.round(i * per)), e = addDays(p.start, Math.round((i + 1) * per) - 1);
     let tot = 0, n = 0;
     for (let d = s; d <= e && d <= p.today; d = addDays(d, 1)) { const en = getEntry(ymd(d)); if (hasEntry(en)) { tot += score(en); n++; } }
-    const status = s > p.today ? 'Not started' : (n ? `Average ${(tot / n).toFixed(1)} of ${MAX_SCORE}, ${n} days logged` : 'No days logged yet');
+    const status = s > p.today ? T('Not started') : (n ? T('Average {0} of {1}, {2} days logged', (tot / n).toFixed(1), MAX_SCORE, n) : T('No days logged yet'));
     const pct = n ? Math.round(tot / n / MAX_SCORE * 100) : 0;
-    return `<div style="padding:6px 0"><div style="display:flex;justify-content:space-between"><strong style="font-size:.9rem">${i + 1}. ${name}</strong></div>
-      <div class="wk" style="padding:4px 0;cursor:default"><span class="b"><i style="width:${pct}%"></i></span></div><div class="muted">${fmtD(s)} to ${fmtD(e)}. ${status}</div></div>`;
+    return `<div style="padding:6px 0"><div style="display:flex;justify-content:space-between"><strong style="font-size:.9rem">${i + 1}. ${T(name)}</strong></div>
+      <div class="wk" style="padding:4px 0;cursor:default"><span class="b"><i style="width:${pct}%"></i></span></div><div class="muted">${T('{0} to {1}. {2}', fmtD(s), fmtD(e), status)}</div></div>`;
   }).join('');
 }
 function runs(days) {
@@ -505,42 +608,42 @@ function weekStats() {
 }
 function renderProgress() {
   const w = weekStats(), days = reportRange(), r = runs(days);
-  const rows = w.bars.map(([d, s]) => `<button class="wk" data-open="${ymd(d)}"><span class="l">${d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+  const rows = w.bars.map(([d, s]) => `<button class="wk" data-open="${ymd(d)}"><span class="l">${fmtWD(d)}</span>
       <span class="b"><i style="width:${Math.round(s / MAX_SCORE * 100)}%"></i></span><span class="s">${s}/${MAX_SCORE}</span></button>`).join('');
-  const summary = `Road to Ramadan, last 7 days: logged ${w.logged} of 7 days. Average consistency ${w.avg} of ${MAX_SCORE}. Prayers ${w.pr} of 35. Qur'an ${w.qur} minutes, learning ${w.learn} minutes, movement ${w.ex} minutes.`;
+  const summary = T('Road to Ramadan, last 7 days: logged {0} of 7 days. Average consistency {1} of {2}. Prayers {3} of 35. Qur\'an {4} minutes, learning {5} minutes, movement {6} minutes.', w.logged, w.avg, MAX_SCORE, w.pr, w.qur, w.learn, w.ex);
   $('#v-progress').innerHTML = `
     <div class="stats">
-      <div class="card stat"><b>${w.avg}</b><span>avg score this week</span></div>
-      <div class="card stat"><b>${w.pr}/35</b><span>prayers this week</span></div>
-      <div class="card stat"><b>${r.now}</b><span>days in a row now</span></div>
-      <div class="card stat"><b>${r.best}</b><span>best run</span></div>
+      <div class="card stat"><b>${w.avg}</b><span>${T('avg score this week')}</span></div>
+      <div class="card stat"><b>${w.pr}/35</b><span>${T('prayers this week')}</span></div>
+      <div class="card stat"><b>${r.now}</b><span>${T('days in a row now')}</span></div>
+      <div class="card stat"><b>${r.best}</b><span>${T('best run')}</span></div>
     </div>
-    <div class="card"><div class="h">Last 7 days</div>${rows}
-      <p class="muted">Tap a day to open it. Breaks are fine. Resume at the next prayer.</p>
-      <div class="actions"><button class="btn" id="shareBtn">Share my week</button><button class="btn ghost" id="copySum">Copy as text</button></div>
+    <div class="card"><div class="h">${T('Last 7 days')}</div>${rows}
+      <p class="muted">${T('Tap a day to open it. Breaks are fine. Resume at the next prayer.')}</p>
+      <div class="actions"><button class="btn" id="shareBtn">${T('Share my week')}</button><button class="btn ghost" id="copySum">${T('Copy as text')}</button></div>
       <textarea id="sumBox" class="hide" style="margin-top:10px" readonly>${esc(summary)}</textarea></div>
-    <div class="card"><div class="h">Prayer calendar</div>${heatmap(days)}</div>
-    <div class="card"><div class="h">Minutes per day</div>${trendSVG(days)}</div>
-    <div class="card"><div class="h">Habit strength</div>${habitStrength(days)}</div>
+    <div class="card"><div class="h">${T('Prayer calendar')}</div>${heatmap(days)}</div>
+    <div class="card"><div class="h">${T('Minutes per day')}</div>${trendSVG(days)}</div>
+    <div class="card"><div class="h">${T('Habit strength')}</div>${habitStrength(days)}</div>
     ${extrasReport(days)}
-    <div class="card"><div class="h">Your four phases</div>${phaseReport()}</div>
-    <div class="actions noprint" style="justify-content:center;margin-bottom:8px"><button class="btn ghost" id="printBtn">Print or save as PDF</button></div>`;
+    <div class="card"><div class="h">${T('Your four phases')}</div>${phaseReport()}</div>
+    <div class="actions noprint" style="justify-content:center;margin-bottom:8px"><button class="btn ghost" id="printBtn">${T('Print or save as PDF')}</button></div>`;
   $('#copySum').onclick = () => copyText(summary, $('#sumBox'));
   $('#shareBtn').onclick = () => shareCard(w, r);
   $('#printBtn').onclick = () => window.print();
 }
 function extrasReport(days) {
-  const X = mem.settings.extras, T = totals(), out = [];
+  const X = mem.settings.extras, N = totals(), out = [];
   const bar = (label, v, max, note) => `<div style="padding:6px 0"><strong style="font-size:.9rem">${label}</strong><div class="wk" style="padding:4px 0;cursor:default"><span class="b"><i style="width:${max ? Math.min(100, Math.round(v / max * 100)) : 0}%"></i></span></div><div class="muted">${note}</div></div>`;
-  if (X.fast) { const o = mem.settings.qadaOwed; out.push(o ? bar('🍽️ Qada fasts', T.qada, o, `${T.qada} of ${o} made up. ${T.practice} practice fasts.`) : `<p class="muted">🍽️ ${T.qada} qada and ${T.practice} practice fasts logged.</p>`); }
-  if (X.pages) out.push(bar('📗 Qur’an pages', T.pages, QURAN_PAGES, `${T.pages} of ${QURAN_PAGES} pages, about ${Math.min(30, Math.floor(T.pages / 20.13))} of 30 juz.`));
-  if (X.sadaqah) out.push(`<p class="muted" style="margin:6px 0">💝 Sadaqah given: ${T.sadaqah}.</p>`);
+  if (X.fast) { const o = mem.settings.qadaOwed; out.push(o ? bar('🍽️ ' + T('Qada fasts'), N.qada, o, T('{0} of {1} made up. {2} practice fasts.', N.qada, o, N.practice)) : `<p class="muted">🍽️ ${T('{0} qada and {1} practice fasts logged.', N.qada, N.practice)}</p>`); }
+  if (X.pages) out.push(bar('📗 ' + T('Qur’an pages'), N.pages, QURAN_PAGES, T('{0} of {1} pages, about {2} of 30 juz.', N.pages, QURAN_PAGES, Math.min(30, Math.floor(N.pages / 20.13)))));
+  if (X.sadaqah) out.push(`<p class="muted" style="margin:6px 0">💝 ${T('Sadaqah given: {0}.', N.sadaqah)}</p>`);
   if (X.sleep) {
     const hs = days.slice(-7).map(d => sleepHours(getEntry(ymd(d)))).filter(Boolean);
-    out.push(`<p class="muted" style="margin:6px 0">😴 ${hs.length ? `Average sleep ${(hs.reduce((a, b) => a + b, 0) / hs.length).toFixed(1)} hours over ${hs.length} nights this week.` : 'Log bedtime and wake time to see your sleep.'}</p>`);
+    out.push(`<p class="muted" style="margin:6px 0">😴 ${hs.length ? T('Average sleep {0} hours over {1} nights this week.', (hs.reduce((a, b) => a + b, 0) / hs.length).toFixed(1), hs.length) : T('Log bedtime and wake time to see your sleep.')}</p>`);
   }
-  if (X.dua) out.push(`<p class="muted" style="margin:6px 0">🤲 ${mem.duas.length} ${mem.duas.length === 1 ? 'dua' : 'duas'} on your Ramadan list.</p>`);
-  return out.length ? `<div class="card"><div class="h">Extra trackers</div>${out.join('')}</div>` : '';
+  if (X.dua) out.push(`<p class="muted" style="margin:6px 0">🤲 ${T(mem.duas.length === 1 ? '{0} dua on your Ramadan list.' : '{0} duas on your Ramadan list.', mem.duas.length)}</p>`);
+  return out.length ? `<div class="card"><div class="h">${T('Extra trackers')}</div>${out.join('')}</div>` : '';
 }
 function onProgressClick(ev) {
   const b = ev.target.closest('[data-open]'); if (!b) return;
@@ -553,30 +656,30 @@ function shareCard(w, r) {
   x.fillStyle = g; x.fillRect(0, 0, 1080, 1080);
   x.fillStyle = '#C9A227'; x.font = `600 40px ${F}`; x.fillText('Road to Ramadan', 80, 120);
   const p = planInfo();
-  x.fillStyle = '#fff'; x.font = `700 92px ${F}`; x.fillText(p.state === 'after' ? 'Ramadan has begun' : `${p.left} days to go`, 80, 240);
-  x.font = `400 38px ${F}`; x.globalAlpha = .85; x.fillText('My last 7 days', 80, 310); x.globalAlpha = 1;
+  x.fillStyle = '#fff'; x.font = `700 92px ${F}`; x.fillText(p.state === 'after' ? T('Ramadan has begun') : T('{0} days to go', p.left), 80, 240);
+  x.font = `400 38px ${F}`; x.globalAlpha = .85; x.fillText(T('My last 7 days'), 80, 310); x.globalAlpha = 1;
   const bw = 100, gap = 30, base = 640, maxH = 260;
   w.bars.forEach(([d, s], i) => {
     const bx = 80 + i * (bw + gap), h = Math.max(6, s / MAX_SCORE * maxH);
     x.fillStyle = 'rgba(255,255,255,.15)'; x.fillRect(bx, base - maxH, bw, maxH);
     x.fillStyle = '#C9A227'; x.fillRect(bx, base - h, bw, h);
     x.fillStyle = '#fff'; x.font = `400 30px ${F}`; x.textAlign = 'center';
-    x.fillText(d.toLocaleDateString('en-GB', { weekday: 'short' }), bx + bw / 2, base + 45); x.textAlign = 'left';
+    x.fillText(wdS(d), bx + bw / 2, base + 45); x.textAlign = 'left';
   });
-  const stats = [[`${w.pr}/35`, 'prayers'], [w.avg, 'avg score'], [`${w.qur}`, 'Qur’an min'], [`${r.best}`, 'best run']];
+  const stats = [[`${w.pr}/35`, T('prayers')], [w.avg, T('avg score')], [`${w.qur}`, T('Qur’an min')], [`${r.best}`, T('best run')]];
   stats.forEach(([v, l], i) => {
     const sx = 80 + i * 235; x.fillStyle = '#fff'; x.font = `700 64px ${F}`; x.fillText(v, sx, 820);
     x.font = `400 30px ${F}`; x.globalAlpha = .85; x.fillText(l, sx, 865); x.globalAlpha = 1;
   });
-  x.fillStyle = '#C9A227'; x.font = `500 32px ${F}`; x.fillText('Free planner: basheerkazi.github.io/road-to-ramadan', 80, 980);
-  x.fillStyle = '#fff'; x.globalAlpha = .85; x.font = `400 28px ${F}`; x.fillText('Basheer Kazi · Growth with Purpose', 80, 1025); x.textAlign = 'right'; x.fillText(AHILLA_LINK ? 'Get the AHILLA app' : 'AHILLA app coming soon', 1000, 1025); x.textAlign = 'left'; x.globalAlpha = 1;
+  x.fillStyle = '#C9A227'; x.font = `500 32px ${F}`; x.fillText(T('Free planner: basheerkazi.github.io/road-to-ramadan'), 80, 980);
+  x.fillStyle = '#fff'; x.globalAlpha = .85; x.font = `400 28px ${F}`; x.fillText('Basheer Kazi · Growth with Purpose', 80, 1025); x.textAlign = 'right'; x.fillText(T(AHILLA_LINK ? 'Get the AHILLA app' : 'AHILLA app coming soon'), 1000, 1025); x.textAlign = 'left'; x.globalAlpha = 1;
   c.toBlob(async blob => {
     const file = new File([blob], 'road-to-ramadan-week.png', { type: 'image/png' });
     try {
-      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'My Road to Ramadan week' }); return; }
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: T('My Road to Ramadan week') }); return; }
     } catch (e) { if (e.name === 'AbortError') return; }
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
-    toast('Image saved');
+    toast(T('Image saved'));
   }, 'image/png');
 }
 
@@ -585,37 +688,37 @@ const weekKey = () => { const t = todayD(); return ymd(addDays(t, -t.getDay()));
 function renderAudit() {
   const wk = weekKey(), a = mem.audits[wk] || [];
   const done = a.filter(x => x && x.trim()).length;
-  const qs = AUDIT_QS.map((q, i) => `<div style="margin-bottom:12px"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${esc(q)}</p>
+  const qs = AUDIT_QS.map((q, i) => `<div style="margin-bottom:12px"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${esc(T(q))}</p>
     <textarea data-q="${i}">${esc(a[i] || '')}</textarea></div>`).join('');
-  $('#v-audit').innerHTML = `<div class="card"><div class="h">Sunday audit <span class="muted" id="auditCount">${done} of 10</span></div>
-    <p class="muted">Week starting ${fmtD(parse(wk))}. Answer honestly, in your own words. Only you see these.</p>${qs}</div>
+  $('#v-audit').innerHTML = `<div class="card"><div class="h">${T('Sunday audit')} <span class="muted" id="auditCount">${T('{0} of 10', done)}</span></div>
+    <p class="muted">${T('Week starting {0}. Answer honestly, in your own words. Only you see these.', fmtD(parse(wk)))}</p>${qs}</div>
     ${mem.settings.extras.dua ? duaCard() : ''}`;
 }
 function duaCard() {
-  const list = mem.duas.map((d, i) => `<div class="row"><span class="grow">🤲 ${esc(d.t)}</span><button class="chip" data-deldua="${i}" aria-label="Remove">✕</button></div>`).join('');
-  return `<div class="card"><div class="h">My Ramadan dua list <span class="muted">${mem.duas.length}</span></div>
-    <p class="muted">Build your list over the weeks, so you are ready for the nights of Ramadan.</p>${list}
-    <div class="actions"><input type="text" id="duaIn" placeholder="Add a dua" style="flex:1"><button class="btn" id="duaAdd">Add</button></div></div>`;
+  const list = mem.duas.map((d, i) => `<div class="row"><span class="grow">🤲 ${esc(d.t)}</span><button class="chip" data-deldua="${i}" aria-label="${T('Remove')}">✕</button></div>`).join('');
+  return `<div class="card"><div class="h">${T('My Ramadan dua list')} <span class="muted">${mem.duas.length}</span></div>
+    <p class="muted">${T('Build your list over the weeks, so you are ready for the nights of Ramadan.')}</p>${list}
+    <div class="actions"><input type="text" id="duaIn" placeholder="${T('Add a dua')}" style="flex:1"><button class="btn" id="duaAdd">${T('Add')}</button></div></div>`;
 }
 function onAuditClick(ev) {
   const b = ev.target.closest('button'); if (!b) return;
   if (b.id === 'duaAdd') { const v = $('#duaIn').value.trim(); if (!v) return; mem.duas.push({ t: v, d: ymd(todayD()) }); save(); renderAudit(); }
-  else if (b.dataset.deldua !== undefined) { if (b.dataset.armed) { mem.duas.splice(Number(b.dataset.deldua), 1); save(); renderAudit(); } else { b.dataset.armed = 1; b.textContent = 'Remove?'; } }
+  else if (b.dataset.deldua !== undefined) { if (b.dataset.armed) { mem.duas.splice(Number(b.dataset.deldua), 1); save(); renderAudit(); } else { b.dataset.armed = 1; b.textContent = T('Remove?'); } }
 }
 function onAuditInput(ev) {
   const t = ev.target; if (t.dataset.q === undefined) return;
   const wk = weekKey(); mem.audits[wk] = mem.audits[wk] || [];
   mem.audits[wk][Number(t.dataset.q)] = t.value; save();
-  $('#auditCount').textContent = mem.audits[wk].filter(x => x && x.trim()).length + ' of 10';
+  $('#auditCount').textContent = T('{0} of 10', mem.audits[wk].filter(x => x && x.trim()).length);
 }
 
 /* ---------- Settings ---------- */
 function promoCard() {
-  return `<div class="card promo"><span class="tag">From the makers</span><div class="h" style="margin:0 0 4px">AHILLA app</div>
-    <p class="muted" style="margin:0">Prayer times, Tahajjud alerts and full Ramadan tools in one app.${AHILLA_LINK ? '' : ' Coming soon.'}</p>
-    ${AHILLA_LINK ? `<div class="actions"><a class="btn" href="${esc(AHILLA_LINK)}" target="_blank" rel="noopener">Open AHILLA</a></div>` : ''}</div>`;
+  return `<div class="card promo"><span class="tag">${T('From the makers')}</span><div class="h" style="margin:0 0 4px">${T('AHILLA app')}</div>
+    <p class="muted" style="margin:0">${T('Prayer times, Tahajjud alerts and full Ramadan tools in one app.')}${AHILLA_LINK ? '' : T(' Coming soon.')}</p>
+    ${AHILLA_LINK ? `<div class="actions"><a class="btn" href="${esc(AHILLA_LINK)}" target="_blank" rel="noopener">${T('Open AHILLA')}</a></div>` : ''}</div>`;
 }
-const seg = (name, opts, cur) => `<div class="seg" data-seg="${name}">${opts.map(([v, l]) => `<button data-val="${v}" class="${String(cur) === String(v) ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+const seg = (name, opts, cur) => `<div class="seg" data-seg="${name}">${opts.map(([v, l]) => `<button data-val="${v}" class="${String(cur) === String(v) ? 'on' : ''}">${T(l)}</button>`).join('')}</div>`;
 function csvCell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
 function buildCSV() {
   const head = ['date', ...PRAYERS.map(p => p[0]), 'quran_min', 'dhikr', 'learning_min', 'character', 'kindness', 'family', 'movement_min', 'digital', 'repair', 'score', 'fast', 'quran_pages', 'sadaqah', 'sleep_hours', 'notes'];
@@ -628,64 +731,65 @@ function buildCSV() {
 }
 function renderSettings() {
   const s = mem.settings, L = s.levels;
-  const lvl = (k, n) => `<div class="row"><span class="grow">${n}</span>${seg('lvl-' + k, LEVEL_NAMES.map((x, i) => [i, x]), L[k])}</div>`;
+  const lvl = (k, n) => `<div class="row"><span class="grow">${T(n)}</span>${seg('lvl-' + k, LEVEL_NAMES.map((x, i) => [i, x]), L[k])}</div>`;
   $('#v-settings').innerHTML = `
-    <div class="card"><div class="h">Your dates</div>
-      <div class="row"><span class="grow">Plan start</span><input type="date" style="width:auto" data-set="start" value="${s.start}"></div>
-      <div class="row"><span class="grow">1 Ramadan</span><input type="date" style="width:auto" data-set="ramadan" value="${s.ramadan}"></div>
-      <p class="muted">The plan counts back from 1 Ramadan and is never longer than ${PLAN_DAYS} days. Check the date with your local moon committee. The plan moves when you change it.</p></div>
-    <div class="card"><div class="h">Extra trackers</div>
-      ${[['fast', '🍽️ Fasts (practice and qada)'], ['pages', '📗 Qur’an pages'], ['sadaqah', '💝 Sadaqah'], ['sleep', '😴 Sleep'], ['dua', '🤲 Dua list']].map(([k, n]) => `<div class="row"><span class="grow">${n}</span>${seg('x-' + k, [[1, 'On'], [0, 'Off']], s.extras[k] ? 1 : 0)}</div>`).join('')}
-      <div class="row"><span class="grow">Qada fasts I owe</span><input type="number" min="0" inputmode="numeric" data-set="qadaOwed" value="${s.qadaOwed || ''}" placeholder="0" style="width:90px"></div>
-      <p class="muted">These help you prepare. They do not change your consistency score.</p></div>
-    <div class="card"><div class="h">Daily targets</div>
+    <div class="card"><div class="h">${T('Your dates')}</div>
+      <div class="row"><span class="grow">${T('Plan start')}</span><input type="date" style="width:auto" data-set="start" value="${s.start}"></div>
+      <div class="row"><span class="grow">${T('1 Ramadan')}</span><input type="date" style="width:auto" data-set="ramadan" value="${s.ramadan}"></div>
+      <p class="muted">${T('The plan counts back from 1 Ramadan and is never longer than {0} days. Check the date with your local moon committee. The plan moves when you change it.', PLAN_DAYS)}</p></div>
+    <div class="card"><div class="h">${T('Extra trackers')}</div>
+      ${[['fast', '🍽️', 'Fasts (practice and qada)'], ['pages', '📗', 'Qur’an pages'], ['sadaqah', '💝', 'Sadaqah'], ['sleep', '😴', 'Sleep'], ['dua', '🤲', 'Dua list']].map(([k, ic, n]) => `<div class="row"><span class="grow">${ic} ${T(n)}</span>${seg('x-' + k, [[1, 'On'], [0, 'Off']], s.extras[k] ? 1 : 0)}</div>`).join('')}
+      <div class="row"><span class="grow">${T('Qada fasts I owe')}</span><input type="number" min="0" inputmode="numeric" data-set="qadaOwed" value="${s.qadaOwed || ''}" placeholder="0" style="width:90px"></div>
+      <p class="muted">${T('These help you prepare. They do not change your consistency score.')}</p></div>
+    <div class="card"><div class="h">${T('Daily targets')}</div>
       ${lvl('qur', 'Qur’an')}${lvl('learn', 'Learning')}${lvl('exercise', 'Movement')}
-      <p class="muted">Minimum, Standard and Stretch. Pick what you can keep up, not what looks impressive.</p></div>
-    <div class="card"><div class="h">Look</div>
-      <div class="row"><span class="grow">Theme</span>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']], s.theme)}</div>
-      <div class="row"><span class="grow">Text size</span>${seg('fs', [[15, 'A'], [16, 'A+'], [18, 'A++']], s.fs)}</div></div>
-    <div class="card"><div class="h">Install as an app</div>
+      <p class="muted">${T('Minimum, Standard and Stretch. Pick what you can keep up, not what looks impressive.')}</p></div>
+    <div class="card"><div class="h">${T('Look')}</div>
+      <div class="row"><span class="grow">${T('Language')}</span>${langSeg()}</div>
+      <div class="row"><span class="grow">${T('Theme')}</span>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']], s.theme)}</div>
+      <div class="row"><span class="grow">${T('Text size')}</span>${seg('fs', [[15, 'A'], [16, 'A+'], [18, 'A++']], s.fs)}</div></div>
+    <div class="card"><div class="h">${T('Install as an app')}</div>
       <p class="muted" id="instMsg">${installMsg()}</p>
-      <div class="actions"><button class="btn ${deferredInstall ? '' : 'hide'}" id="instBtn">Install Road to Ramadan</button></div></div>
-    <div class="card"><div class="h">Daily reminder</div>
-      <p class="muted">Adds a repeating daily reminder to your phone calendar, until Ramadan. Pick a time, then open the file.</p>
-      <div class="row"><span class="grow">Time</span><input type="time" id="remTime" value="${s.remTime || '21:00'}" style="width:auto;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit"></div>
-      <div class="actions"><button class="btn ghost" id="remBtn">Add to calendar</button></div></div>
-    <div class="card"><div class="h">Your data</div>
-      <p class="muted">Everything stays on this device. Save a backup file before you change or reset your phone, then restore it on the new one.</p>
-      <div class="actions"><button class="btn" id="bkBtn">Save backup</button><button class="btn ghost" id="rsBtn">Restore backup</button>
+      <div class="actions"><button class="btn ${deferredInstall ? '' : 'hide'}" id="instBtn">${T('Install Road to Ramadan')}</button></div></div>
+    <div class="card"><div class="h">${T('Daily reminder')}</div>
+      <p class="muted">${T('Adds a repeating daily reminder to your phone calendar, until Ramadan. Pick a time, then open the file.')}</p>
+      <div class="row"><span class="grow">${T('Time')}</span><input type="time" id="remTime" value="${s.remTime || '21:00'}" style="width:auto;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit"></div>
+      <div class="actions"><button class="btn ghost" id="remBtn">${T('Add to calendar')}</button></div></div>
+    <div class="card"><div class="h">${T('Your data')}</div>
+      <p class="muted">${T('Everything stays on this device. Save a backup file before you change or reset your phone, then restore it on the new one.')}</p>
+      <div class="actions"><button class="btn" id="bkBtn">${T('Save backup')}</button><button class="btn ghost" id="rsBtn">${T('Restore backup')}</button>
         <input type="file" id="rsFile" accept=".json,application/json" class="hide"></div>
-      <p class="muted" id="bkMsg">${s.lastBackup ? 'Last backup: ' + fmtD(parse(s.lastBackup)) : 'No backup saved yet.'}</p>
-      <div class="actions"><button class="btn ghost" id="csvBtn">Show export (CSV)</button></div>
+      <p class="muted" id="bkMsg">${s.lastBackup ? T('Last backup: {0}', fmtD(parse(s.lastBackup))) : T('No backup saved yet.')}</p>
+      <div class="actions"><button class="btn ghost" id="csvBtn">${T('Show export (CSV)')}</button></div>
       <textarea id="csvBox" class="hide" style="margin-top:10px;min-height:140px" readonly></textarea>
-      <div class="actions"><button class="btn hide" id="copyCsv">Copy CSV</button></div></div>
+      <div class="actions"><button class="btn hide" id="copyCsv">${T('Copy CSV')}</button></div></div>
     ${promoCard()}
-    <div class="card"><div class="h">Clear</div>
-      <div class="actions"><button class="btn danger" id="clearDay">Clear selected day</button><button class="btn danger" id="clearAll">Clear everything</button></div>
-      <p class="muted" id="clearMsg">Clearing needs a second tap to confirm.</p></div>
-    <div class="actions" style="justify-content:center"><button class="linkbtn" id="redoOb">Show the welcome again</button></div>`;
+    <div class="card"><div class="h">${T('Clear')}</div>
+      <div class="actions"><button class="btn danger" id="clearDay">${T('Clear selected day')}</button><button class="btn danger" id="clearAll">${T('Clear everything')}</button></div>
+      <p class="muted" id="clearMsg">${T('Clearing needs a second tap to confirm.')}</p></div>
+    <div class="actions" style="justify-content:center"><button class="linkbtn" id="redoOb">${T('Show the welcome again')}</button></div>`;
   $('#csvBtn').onclick = () => { const b = $('#csvBox'); b.value = buildCSV(); b.classList.remove('hide'); const c = $('#copyCsv'); c.classList.remove('hide'); c.onclick = () => copyText(b.value, b); };
   let aD = false, aA = false;
-  $('#clearDay').onclick = () => { if (!aD) { aD = true; $('#clearMsg').textContent = `Tap again to clear ${fmtD(parse(curKey))}.`; return; } delete mem.days[curKey]; save(true); aD = false; $('#clearMsg').textContent = 'Day cleared.'; };
-  $('#clearAll').onclick = () => { if (!aA) { aA = true; $('#clearMsg').textContent = 'Tap again to erase every entry on this device.'; return; } mem.days = {}; mem.audits = {}; save(true); aA = false; $('#clearMsg').textContent = 'Everything cleared.'; };
+  $('#clearDay').onclick = () => { if (!aD) { aD = true; $('#clearMsg').textContent = T('Tap again to clear {0}.', fmtD(parse(curKey))); return; } delete mem.days[curKey]; save(true); aD = false; $('#clearMsg').textContent = T('Day cleared.'); };
+  $('#clearAll').onclick = () => { if (!aA) { aA = true; $('#clearMsg').textContent = T('Tap again to erase every entry on this device.'); return; } mem.days = {}; mem.audits = {}; save(true); aA = false; $('#clearMsg').textContent = T('Everything cleared.'); };
   $('#redoOb').onclick = () => openOnboarding();
   $('#instBtn').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; renderSettings(); };
   $('#remBtn').onclick = () => { mem.settings.remTime = $('#remTime').value || '21:00'; save(true); saveFile(buildICS(mem.settings.remTime), 'road-to-ramadan-reminder.ics', 'text/calendar'); };
-  $('#bkBtn').onclick = () => { mem.settings.lastBackup = ymd(todayD()); save(true); saveFile(JSON.stringify(mem, null, 1), `road-to-ramadan-backup-${ymd(todayD())}.json`, 'application/json'); $('#bkMsg').textContent = 'Backup saved. Keep the file somewhere safe, such as Google Drive.'; };
+  $('#bkBtn').onclick = () => { mem.settings.lastBackup = ymd(todayD()); save(true); saveFile(JSON.stringify(mem, null, 1), `road-to-ramadan-backup-${ymd(todayD())}.json`, 'application/json'); $('#bkMsg').textContent = T('Backup saved. Keep the file somewhere safe, such as Google Drive.'); };
   $('#rsBtn').onclick = () => $('#rsFile').click();
   $('#rsFile').onchange = ev => restoreBackup(ev.target.files[0]);
 }
 let deferredInstall = null;
 const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 function installMsg() {
-  if (isStandalone()) return 'Installed. You are using the app version.';
-  if (deferredInstall) return 'Add it to your home screen or desktop. It opens like an app and works offline.';
-  if (/iphone|ipad/i.test(navigator.userAgent)) return 'On iPhone: tap the Share button in Safari, then “Add to Home Screen”.';
-  return 'In Chrome or Edge, open the browser menu and choose “Install app” or “Add to Home screen”.';
+  if (isStandalone()) return T('Installed. You are using the app version.');
+  if (deferredInstall) return T('Add it to your home screen or desktop. It opens like an app and works offline.');
+  if (/iphone|ipad/i.test(navigator.userAgent)) return T('On iPhone: tap the Share button in Safari, then “Add to Home Screen”.');
+  return T('In Chrome or Edge, open the browser menu and choose “Install app” or “Add to Home screen”.');
 }
 function saveFile(text, name, type) {
   const blob = new Blob([text], { type }), file = new File([blob], name, { type });
-  const fallback = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); toast('File saved'); };
+  const fallback = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); toast(T('File saved')); };
   try { if (navigator.canShare && navigator.canShare({ files: [file] }) && /android|iphone|ipad/i.test(navigator.userAgent)) { navigator.share({ files: [file], title: name }).catch(e => { if (e.name !== 'AbortError') fallback(); }); return; } } catch (e) {}
   fallback();
 }
@@ -694,10 +798,10 @@ function restoreBackup(f) {
   const r = new FileReader();
   r.onload = () => {
     let d; try { d = JSON.parse(r.result); } catch (e) { d = null; }
-    if (!d || typeof d !== 'object' || !d.days || !d.settings) { $('#bkMsg').textContent = 'That file is not a Road to Ramadan backup.'; return; }
+    if (!d || typeof d !== 'object' || !d.days || !d.settings) { $('#bkMsg').textContent = T('That file is not a Road to Ramadan backup.'); return; }
     const n = Object.keys(d.days).length;
-    if (!confirm(`Restore ${n} days from this backup? It replaces what is on this device now.`)) return;
-    mem = d; save(true); load(); applyLook(); renderHero(); renderSettings(); toast(`Restored ${n} days`);
+    if (!confirm(T('Restore {0} days from this backup? It replaces what is on this device now.', n))) return;
+    mem = d; save(true); load(); applyLook(); applyLang(); renderHero(); renderSettings(); toast(T('Restored {0} days', n));
   };
   r.readAsText(f);
 }
@@ -707,11 +811,11 @@ function buildICS(t) {
   const url = location.protocol.startsWith('http') ? location.href.split('#')[0] : 'https://basheerkazi.github.io/road-to-ramadan/';
   return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Road to Ramadan//EN', 'BEGIN:VEVENT', 'UID:rtr-daily-' + Date.now() + '@road-to-ramadan',
     'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', 'DTSTART:' + dt, 'DURATION:PT10M',
-    'RRULE:FREQ=DAILY;UNTIL=' + until + 'T235959', 'SUMMARY:Road to Ramadan check-in', 'DESCRIPTION:Two minutes to log today. ' + url, 'URL:' + url,
-    'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:Road to Ramadan check-in', 'TRIGGER:PT0M', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    'RRULE:FREQ=DAILY;UNTIL=' + until + 'T235959', 'SUMMARY:' + T('Road to Ramadan check-in'), 'DESCRIPTION:' + T('Two minutes to log today.') + ' ' + url, 'URL:' + url,
+    'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + T('Road to Ramadan check-in'), 'TRIGGER:PT0M', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
 }
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; if (view === 'settings') renderSettings(); });
-window.addEventListener('appinstalled', () => { deferredInstall = null; toast('Installed'); });
+window.addEventListener('appinstalled', () => { deferredInstall = null; toast(T('Installed')); });
 if ('serviceWorker' in navigator && location.protocol === 'https:') { try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {} }
 
 function onSettingsClick(ev) {
@@ -722,12 +826,23 @@ function onSettingsClick(ev) {
   else if (name.startsWith('x-')) mem.settings.extras[name.slice(2)] = v === '1';
   else if (name === 'theme') { mem.settings.theme = v; applyLook(); }
   else if (name === 'fs') { mem.settings.fs = Number(v); applyLook(); }
+  else if (name === 'lang') { setLang(v); return; }
   save();
 }
 function onSettingsChange(ev) {
   const t = ev.target;
   if (t.dataset.set === 'qadaOwed') { mem.settings.qadaOwed = Math.max(0, Math.round(Number(t.value) || 0)); save(); return; }
   if (t.dataset.set && t.value) { mem.settings[t.dataset.set] = t.value; save(); renderHero(); }
+}
+const langSeg = () => `<div class="seg" data-seg="lang">${[['en', 'English'], ['ur', 'उर्दू']].map(([v, l]) => `<button data-val="${v}" lang="${v === 'ur' ? 'ur-Deva' : 'en'}" class="${(mem.settings.lang || 'en') === v ? 'on' : ''}">${l}</button>`).join('')}</div>`;
+function applyLang() {
+  document.documentElement.lang = isUr() ? 'ur-Deva' : 'en';
+  $('#footTxt').textContent = T('This is a consistency tool, not a measure of your faith or worth. Missed a day? Resume at the next prayer.');
+  document.querySelectorAll('#tabs button').forEach(b => { b.querySelector('span').textContent = T(b.dataset.v[0].toUpperCase() + b.dataset.v.slice(1)); });
+}
+function setLang(v) {
+  mem.settings.lang = v === 'ur' ? 'ur' : 'en'; save(true); applyLang(); renderHero(); renderWarn();
+  if ($('#ob').innerHTML) renderOb(); else show(view);
 }
 function applyLook() {
   const s = mem.settings;
@@ -738,7 +853,7 @@ function applyLook() {
 
 function copyText(text, box) {
   const fallback = () => { box.classList.remove('hide'); box.value = text; box.focus(); box.select(); };
-  try { navigator.clipboard.writeText(text).then(() => toast('Copied'), fallback); } catch (e) { fallback(); }
+  try { navigator.clipboard.writeText(text).then(() => toast(T('Copied')), fallback); } catch (e) { fallback(); }
 }
 
 /* ---------- Welcome (first run) ---------- */
@@ -752,25 +867,26 @@ function renderOb() {
   const dots = [0, 1, 2].map(i => `<i class="${i <= obStep ? 'on' : ''}"></i>`).join('');
   let body;
   if (obStep === 0) {
-    body = `<h2>Assalamu alaikum 🌙</h2>
+    body = `<div style="margin-bottom:14px" id="obLang">${langSeg()}</div><h2>${T('Assalamu alaikum 🌙')}</h2>
       <p class="muted" style="margin:0 0 10px">By Basheer Kazi · Growth with Purpose</p>
-      <p class="muted">Road to Ramadan helps you build steady habits before Ramadan, a little each day. Everything stays on this phone.</p>
-      <p style="margin-top:16px"><strong>When does Ramadan start for you?</strong></p>
+      <p class="muted">${T('Road to Ramadan helps you build steady habits before Ramadan, a little each day. Everything stays on this phone.')}</p>
+      <p style="margin-top:16px"><strong>${T('When does Ramadan start for you?')}</strong></p>
       <input type="date" id="obRam" value="${obData.ramadan}">
-      <p class="muted">Expected 9 Feb 2027 in India, subject to moon sighting. You can change it later.</p>`;
+      <p class="muted">${T('Expected 9 Feb 2027 in India, subject to moon sighting. You can change it later.')}</p>`;
   } else if (obStep === 1) {
-    body = `<h2>When do you start?</h2>
-      <p class="muted">Today is fine. The plan is at most ${PLAN_DAYS} days, counted back from Ramadan.</p>
+    body = `<h2>${T('When do you start?')}</h2>
+      <p class="muted">${T('Today is fine. The plan is at most {0} days, counted back from Ramadan.', PLAN_DAYS)}</p>
       <input type="date" id="obStart" value="${obData.start}">`;
   } else {
-    body = `<h2>Pick your pace</h2><p class="muted">Daily minutes for Qur’an, learning and movement. Change it any time.</p>
-      <div class="lvl" id="obLvl">${LEVEL_NAMES.map((n, i) => `<button data-l="${i}" class="${obData.level === i ? 'on' : ''}"><strong>${n}</strong><br><span class="muted">Qur’an ${TARGETS.qur[i]} · Learning ${TARGETS.learn[i]} · Movement ${TARGETS.exercise[i]} min</span></button>`).join('')}</div>`;
+    body = `<h2>${T('Pick your pace')}</h2><p class="muted">${T('Daily minutes for Qur’an, learning and movement. Change it any time.')}</p>
+      <div class="lvl" id="obLvl">${LEVEL_NAMES.map((n, i) => `<button data-l="${i}" class="${obData.level === i ? 'on' : ''}"><strong>${T(n)}</strong><br><span class="muted">${T('Qur’an {0} · Learning {1} · Movement {2} min', TARGETS.qur[i], TARGETS.learn[i], TARGETS.exercise[i])}</span></button>`).join('')}</div>`;
   }
   $('#ob').innerHTML = `<div class="ob"><div class="dots">${dots}</div>${body}
-    <div class="actions" style="margin-top:22px">${obStep > 0 ? '<button class="btn ghost" id="obBack">Back</button>' : ''}
-    <button class="btn" id="obNext" style="flex:1">${obStep < 2 ? 'Next' : 'Start my road'}</button></div></div>`;
+    <div class="actions" style="margin-top:22px">${obStep > 0 ? `<button class="btn ghost" id="obBack">${T('Back')}</button>` : ''}
+    <button class="btn" id="obNext" style="flex:1">${T(obStep < 2 ? 'Next' : 'Start my road')}</button></div></div>`;
   $('#obNext').onclick = obNext;
   if ($('#obBack')) $('#obBack').onclick = () => { obCollect(); obStep--; renderOb(); };
+  if ($('#obLang')) $('#obLang').onclick = ev => { const b = ev.target.closest('button'); if (b) { obCollect(); setLang(b.dataset.val); } };
   if ($('#obLvl')) $('#obLvl').onclick = ev => { const b = ev.target.closest('button'); if (!b) return; obData.level = Number(b.dataset.l); renderOb(); };
 }
 function obCollect() {
@@ -786,7 +902,7 @@ function obNext() {
   s.onboarded = true; save(true);
   $('#ob').innerHTML = '';
   renderHero(); show(view);
-  toast('Bismillah. Your road starts now.');
+  toast(T('Bismillah. Your road starts now.'));
 }
 
 /* ---------- Navigation ---------- */
@@ -797,6 +913,7 @@ function show(v) {
   Object.keys(R).forEach(k => $('#v-' + k).classList.toggle('hide', k !== v));
   R[v](); window.scrollTo(0, 0);
 }
+$('#hero').addEventListener('click', ev => { if (ev.target.closest('#langBtn')) setLang(isUr() ? 'en' : 'ur'); });
 $('#tabs').addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) show(b.dataset.v); });
 $('#v-today').addEventListener('click', onTodayClick);
 $('#v-today').addEventListener('input', onTodayInput);
@@ -809,7 +926,7 @@ $('#v-settings').addEventListener('click', onSettingsClick);
 $('#v-settings').addEventListener('change', onSettingsChange);
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyLook);
 
-load(); applyLook(); renderWarn(); renderHero(); show('today');
+load(); applyLook(); applyLang(); renderWarn(); renderHero(); show('today');
 if (!mem.settings.onboarded) openOnboarding();
 </script>
 <script data-goatcounter="https://roadtoramadan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
