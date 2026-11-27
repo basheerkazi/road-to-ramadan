@@ -24,6 +24,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .hero p{margin:0;font-size:.9rem;opacity:.92}
 .hero .pbar{height:8px;background:rgba(255,255,255,.22);border-radius:6px;overflow:hidden;margin-top:12px}
 .hero .pbar i{display:block;height:100%;background:var(--gold);border-radius:6px;transition:width .6s}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 4px}
+.cd div{background:rgba(255,255,255,.12);border-radius:14px;padding:10px 0;text-align:center}
+.cd b{display:block;font-size:2rem;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--gold)}
+.cd span{font-size:.72rem;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+.cdl{font-size:.85rem;opacity:.9;margin-bottom:6px}
 .pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:3px 10px;font-size:.78rem}
 main{max-width:640px;margin:0 auto;padding:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
@@ -238,19 +243,32 @@ function planInfo() {
 const moonNote = () => mem.settings.ramadan === DEFAULT_RAMADAN ? ' Subject to moon sighting, it may be 10 Feb.' : '';
 
 /* ---------- Hero ---------- */
+function countdownHTML() {
+  return `<div class="cd" id="cd" aria-live="off">${['Days', 'Hours', 'Min', 'Sec'].map(l => `<div><b>0</b><span>${l}</span></div>`).join('')}</div>
+    <div class="cdl">until 1 Ramadan (expected)</div>`;
+}
+function tickCountdown() {
+  const el = document.getElementById('cd'); if (!el) return;
+  let ms = parse(mem.settings.ramadan) - new Date();
+  if (ms <= 0) { renderHero(); return; }
+  const v = [Math.floor(ms / 864e5), Math.floor(ms / 36e5) % 24, Math.floor(ms / 6e4) % 60, Math.floor(ms / 1e3) % 60];
+  el.querySelectorAll('b').forEach((b, i) => { const t = i ? pad(v[i]) : String(v[i]); if (b.textContent !== t) b.textContent = t; });
+}
+setInterval(tickCountdown, 1000);
 function renderHero() {
   const p = planInfo();
   let body;
   if (p.state === 'after') {
     body = `<h1>Ramadan has begun</h1><p>Your road is complete. Keep the habits you built.</p>`;
   } else if (p.state === 'before') {
-    body = `<h1>${p.left} days to Ramadan</h1><p>Your plan starts on ${fmtD(p.start)}. Ramadan is expected on ${fmtD(p.ram)}.${moonNote()}</p>`;
+    body = `${countdownHTML()}<p>Your plan starts on ${fmtD(p.start)}. Ramadan is expected on ${fmtD(p.ram)}.${moonNote()}</p>`;
   } else {
     const pct = Math.round(p.idx / p.total * 100);
-    body = `<span class="pill">${PHASES[p.phase]}</span><h1>${p.left} days to Ramadan</h1>
+    body = `<span class="pill">${PHASES[p.phase]}</span>${countdownHTML()}
       <p>Day ${p.idx} of ${p.total}. Ramadan is expected on ${fmtD(p.ram)}.${moonNote()}</p>
       <div class="pbar"><i style="width:${pct}%"></i></div>`;
   }
+  setTimeout(tickCountdown, 0);
   $('#hero').innerHTML = `<div class="top"><span>Road to Ramadan · Basheer Kazi</span><span>${todayD().toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span></div>${body}`;
 }
 
