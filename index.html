@@ -95,6 +95,17 @@ textarea{min-height:70px;resize:vertical}
 .lvl button.on{border-color:var(--gold);background:rgba(201,162,39,.12)}
 .burst{position:fixed;pointer-events:none;z-index:10;font-size:22px;animation:fly 1.1s ease-out forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.6);opacity:0}}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.stat{margin-bottom:4px;padding:12px}
+.stat b{display:block;font-size:1.5rem;color:var(--teal2)}
+[data-theme=dark] .stat b{color:var(--gold)}
+.stat span{font-size:.78rem;color:var(--muted)}
+.hm{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.hm .hd{text-align:center;font-size:.7rem;color:var(--muted)}
+.hc{aspect-ratio:1;border:0;border-radius:7px;font-size:.7rem;background:color-mix(in srgb,var(--gold) calc(var(--a)*100%),var(--soft));color:var(--ink)}
+.hmk{display:flex;align-items:center;gap:4px;margin-top:8px}
+.hmk i{width:14px;height:14px;border-radius:4px;background:color-mix(in srgb,var(--gold) calc(var(--a)*100%),var(--soft))}
+@media print{.tabs,.hero,.noprint,.toast,#storeWarn,.promo,.actions{display:none!important}body{padding:0;background:#fff}.card{break-inside:avoid}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -338,30 +349,150 @@ function onTodayChange(ev) {
 }
 
 /* ---------- Progress ---------- */
-function renderProgress() {
+function reportRange() {
+  const p = planInfo(), today = todayD();
+  let from = p.start;
+  const keys = Object.keys(mem.days).filter(k => hasEntry(getEntry(k))).sort();
+  if (keys.length && parse(keys[0]) < from) from = parse(keys[0]);
+  if (diff(from, today) > PLAN_DAYS) from = addDays(today, -PLAN_DAYS);
+  if (from > today) from = addDays(today, -6);
+  const days = [];
+  for (let d = from; d <= today; d = addDays(d, 1)) days.push(d);
+  return days;
+}
+function trendSVG(days) {
+  const W = 320, H = 150, L = 28, B = 22, T = 8, last = days.slice(-14);
+  const series = [['qur', 'Qur’an', 'var(--teal2)'], ['learn', 'Learning', 'var(--gold)'], ['exercise', 'Movement', '#c0674f']];
+  let max = 10;
+  last.forEach(d => { const e = getEntry(ymd(d)); series.forEach(s => { max = Math.max(max, e[s[0]] || 0); }); });
+  max = Math.ceil(max / 10) * 10;
+  const x = i => L + (last.length < 2 ? 0 : i * (W - L - 6) / (last.length - 1));
+  const y = v => T + (H - T - B) * (1 - v / max);
+  let g = '';
+  [0, max / 2, max].forEach(v => { g += `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L - 4}" y="${y(v) + 4}" text-anchor="end" font-size="10" fill="var(--muted)">${v}</text>`; });
+  last.forEach((d, i) => { if (i % 3 === 0 || i === last.length - 1) g += `<text x="${x(i)}" y="${H - 6}" text-anchor="middle" font-size="10" fill="var(--muted)">${d.getDate()}</text>`; });
+  const lines = series.map(([k, n, c]) => {
+    const pts = last.map((d, i) => `${x(i).toFixed(1)},${y(getEntry(ymd(d))[k] || 0).toFixed(1)}`).join(' ');
+    return `<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+  }).join('');
+  const legend = series.map(([k, n, c]) => `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px"><i style="width:14px;height:3px;border-radius:2px;background:${c}"></i>${n}</span>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Minutes per day, last ${last.length} days">${g}${lines}</svg><div class="muted">${legend}</div>`;
+}
+function heatmap(days) {
+  const first = days[0], lead = first.getDay();
+  let cells = '<div class="hm">' + ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(d => `<span class="hd">${d}</span>`).join('');
+  for (let i = 0; i < lead; i++) cells += '<span></span>';
+  days.forEach(d => {
+    const k = ymd(d), e = getEntry(k), n = PRAYERS.filter(p => e.pr[p[0]]).length;
+    cells += `<button data-open="${k}" class="hc" style="--a:${n / 5}" title="${fmtD(d)}: ${n} of 5 prayers" aria-label="${fmtD(d)}, ${n} of 5 prayers">${d.getDate()}</button>`;
+  });
+  return cells + '</div><div class="muted hmk">Fewer <i style="--a:0"></i><i style="--a:.4"></i><i style="--a:.8"></i><i style="--a:1"></i> All 5 prayers</div>';
+}
+function habitStrength(days) {
+  const logged = days.map(d => getEntry(ymd(d))).filter(hasEntry), L = mem.settings.levels;
+  if (!logged.length) return '<p class="muted">Log a few days to see which habits are strongest.</p>';
+  const items = [
+    ...PRAYERS.map(([k, n, ic]) => [ic + ' ' + n, e => e.pr[k]]),
+    ...MINUTES.map(([k, n, ic]) => [ic + ' ' + n, e => e[k] >= TARGETS[k][L[k]]]),
+    ...HABITS.map(([k, n, ic]) => [ic + ' ' + n, e => e[k]])
+  ].map(([n, f]) => [n, Math.round(logged.filter(f).length / logged.length * 100)]).sort((a, b) => b[1] - a[1]);
+  const row = ([n, v], tag) => `<div class="wk" style="cursor:default"><span class="l" style="width:150px">${n}</span><span class="b"><i style="width:${v}%"></i></span><span class="s">${v}%</span></div>${tag ? `<div class="muted" style="margin:-4px 0 4px">${tag}</div>` : ''}`;
+  return items.map((it, i) => row(it, i === 0 ? 'Your strongest habit. Well done.' : (i === items.length - 1 && it[1] < 100 ? 'Room to grow. Try a small step here this week.' : ''))).join('')
+    + `<p class="muted">Share of the ${logged.length} days you logged.</p>`;
+}
+function phaseReport() {
+  const p = planInfo(), per = p.total / 4;
+  return PHASES.map((name, i) => {
+    const s = addDays(p.start, Math.round(i * per)), e = addDays(p.start, Math.round((i + 1) * per) - 1);
+    let tot = 0, n = 0;
+    for (let d = s; d <= e && d <= p.today; d = addDays(d, 1)) { const en = getEntry(ymd(d)); if (hasEntry(en)) { tot += score(en); n++; } }
+    const status = s > p.today ? 'Not started' : (n ? `Average ${(tot / n).toFixed(1)} of ${MAX_SCORE}, ${n} days logged` : 'No days logged yet');
+    const pct = n ? Math.round(tot / n / MAX_SCORE * 100) : 0;
+    return `<div style="padding:6px 0"><div style="display:flex;justify-content:space-between"><strong style="font-size:.9rem">${i + 1}. ${name}</strong></div>
+      <div class="wk" style="padding:4px 0;cursor:default"><span class="b"><i style="width:${pct}%"></i></span></div><div class="muted">${fmtD(s)} to ${fmtD(e)}. ${status}</div></div>`;
+  }).join('');
+}
+function runs(days) {
+  let best = 0, cur = 0;
+  days.forEach(d => { if (hasEntry(getEntry(ymd(d)))) { cur++; best = Math.max(best, cur); } else cur = 0; });
+  // current run: forgive today if not logged yet
+  let now = 0;
+  for (let i = days.length - 1; i >= 0; i--) { if (hasEntry(getEntry(ymd(days[i])))) now++; else if (i === days.length - 1) continue; else break; }
+  return { best, now };
+}
+function weekStats() {
   const today = todayD();
-  let rows = '', total = 0, logged = 0, qur = 0, learn = 0, ex = 0;
+  let total = 0, logged = 0, qur = 0, learn = 0, ex = 0, pr = 0;
+  const bars = [];
   for (let i = 6; i >= 0; i--) {
-    const d = addDays(today, -i), k = ymd(d), e = getEntry(k), s = score(e);
+    const d = addDays(today, -i), e = getEntry(ymd(d)), s = score(e);
     if (hasEntry(e)) { logged++; total += s; }
-    qur += e.qur || 0; learn += e.learn || 0; ex += e.exercise || 0;
-    rows += `<button class="wk" data-open="${k}"><span class="l">${d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
-      <span class="b"><i style="width:${Math.round(s / MAX_SCORE * 100)}%"></i></span><span class="s">${s}/${MAX_SCORE}</span></button>`;
+    qur += e.qur || 0; learn += e.learn || 0; ex += e.exercise || 0; pr += PRAYERS.filter(p => e.pr[p[0]]).length;
+    bars.push([d, s]);
   }
-  const avg = logged ? (total / logged).toFixed(1) : '0';
-  const summary = `Road to Ramadan, last 7 days: logged ${logged} of 7 days. Average consistency ${avg} of ${MAX_SCORE}. Qur'an ${qur} minutes, learning ${learn} minutes, movement ${ex} minutes.`;
+  return { bars, logged, avg: logged ? (total / logged).toFixed(1) : '0', qur, learn, ex, pr };
+}
+function renderProgress() {
+  const w = weekStats(), days = reportRange(), r = runs(days);
+  const rows = w.bars.map(([d, s]) => `<button class="wk" data-open="${ymd(d)}"><span class="l">${d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+      <span class="b"><i style="width:${Math.round(s / MAX_SCORE * 100)}%"></i></span><span class="s">${s}/${MAX_SCORE}</span></button>`).join('');
+  const summary = `Road to Ramadan, last 7 days: logged ${w.logged} of 7 days. Average consistency ${w.avg} of ${MAX_SCORE}. Prayers ${w.pr} of 35. Qur'an ${w.qur} minutes, learning ${w.learn} minutes, movement ${w.ex} minutes.`;
   $('#v-progress').innerHTML = `
+    <div class="stats">
+      <div class="card stat"><b>${w.avg}</b><span>avg score this week</span></div>
+      <div class="card stat"><b>${w.pr}/35</b><span>prayers this week</span></div>
+      <div class="card stat"><b>${r.now}</b><span>days in a row now</span></div>
+      <div class="card stat"><b>${r.best}</b><span>best run</span></div>
+    </div>
     <div class="card"><div class="h">Last 7 days</div>${rows}
-      <p class="muted">Tap a day to open it. Logged ${logged} of 7 days, average ${avg} of ${MAX_SCORE}.</p>
-      <p class="muted">Qur’an ${qur} min · Learning ${learn} min · Movement ${ex} min</p>
-      <div class="actions"><button class="btn" id="copySum">Copy weekly summary</button></div>
+      <p class="muted">Tap a day to open it. Breaks are fine. Resume at the next prayer.</p>
+      <div class="actions"><button class="btn" id="shareBtn">Share my week</button><button class="btn ghost" id="copySum">Copy as text</button></div>
       <textarea id="sumBox" class="hide" style="margin-top:10px" readonly>${esc(summary)}</textarea></div>
-    <div class="card"><div class="h">More reports coming</div><p class="muted">Prayer calendar, minutes trends, habit strength and a share card are on the way.</p></div>`;
+    <div class="card"><div class="h">Prayer calendar</div>${heatmap(days)}</div>
+    <div class="card"><div class="h">Minutes per day</div>${trendSVG(days)}</div>
+    <div class="card"><div class="h">Habit strength</div>${habitStrength(days)}</div>
+    <div class="card"><div class="h">Your four phases</div>${phaseReport()}</div>
+    <div class="actions noprint" style="justify-content:center;margin-bottom:8px"><button class="btn ghost" id="printBtn">Print or save as PDF</button></div>`;
   $('#copySum').onclick = () => copyText(summary, $('#sumBox'));
+  $('#shareBtn').onclick = () => shareCard(w, r);
+  $('#printBtn').onclick = () => window.print();
 }
 function onProgressClick(ev) {
   const b = ev.target.closest('[data-open]'); if (!b) return;
   curKey = b.dataset.open; show('today');
+}
+function shareCard(w, r) {
+  const c = document.createElement('canvas'); c.width = 1080; c.height = 1080;
+  const x = c.getContext('2d'), F = 'system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+  const g = x.createLinearGradient(0, 0, 1080, 1080); g.addColorStop(0, '#164E60'); g.addColorStop(1, '#1f6a80');
+  x.fillStyle = g; x.fillRect(0, 0, 1080, 1080);
+  x.fillStyle = '#C9A227'; x.font = `600 40px ${F}`; x.fillText('Road to Ramadan', 80, 120);
+  const p = planInfo();
+  x.fillStyle = '#fff'; x.font = `700 92px ${F}`; x.fillText(p.state === 'after' ? 'Ramadan has begun' : `${p.left} days to go`, 80, 240);
+  x.font = `400 38px ${F}`; x.globalAlpha = .85; x.fillText('My last 7 days', 80, 310); x.globalAlpha = 1;
+  const bw = 100, gap = 30, base = 640, maxH = 260;
+  w.bars.forEach(([d, s], i) => {
+    const bx = 80 + i * (bw + gap), h = Math.max(6, s / MAX_SCORE * maxH);
+    x.fillStyle = 'rgba(255,255,255,.15)'; x.fillRect(bx, base - maxH, bw, maxH);
+    x.fillStyle = '#C9A227'; x.fillRect(bx, base - h, bw, h);
+    x.fillStyle = '#fff'; x.font = `400 30px ${F}`; x.textAlign = 'center';
+    x.fillText(d.toLocaleDateString('en-GB', { weekday: 'short' }), bx + bw / 2, base + 45); x.textAlign = 'left';
+  });
+  const stats = [[`${w.pr}/35`, 'prayers'], [w.avg, 'avg score'], [`${w.qur}`, 'Qur’an min'], [`${r.best}`, 'best run']];
+  stats.forEach(([v, l], i) => {
+    const sx = 80 + i * 235; x.fillStyle = '#fff'; x.font = `700 64px ${F}`; x.fillText(v, sx, 820);
+    x.font = `400 30px ${F}`; x.globalAlpha = .85; x.fillText(l, sx, 865); x.globalAlpha = 1;
+  });
+  x.fillStyle = '#C9A227'; x.font = `500 32px ${F}`; x.fillText('Free planner: basheerkazi.github.io/road-to-ramadan', 80, 980);
+  x.fillStyle = '#fff'; x.globalAlpha = .8; x.font = `400 28px ${F}`; x.fillText('AHILLA app coming soon', 80, 1025); x.globalAlpha = 1;
+  c.toBlob(async blob => {
+    const file = new File([blob], 'road-to-ramadan-week.png', { type: 'image/png' });
+    try {
+      if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'My Road to Ramadan week' }); return; }
+    } catch (e) { if (e.name === 'AbortError') return; }
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; a.click();
+    toast('Image saved');
+  }, 'image/png');
 }
 
 /* ---------- Audit ---------- */
