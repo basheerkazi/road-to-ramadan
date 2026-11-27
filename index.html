@@ -59,7 +59,7 @@ main{max-width:640px;margin:0 auto;padding:14px}
 .minute .val.hit{border-color:var(--gold);background:rgba(201,162,39,.14)}
 .chip{border:1px solid var(--line);background:var(--soft);border-radius:20px;padding:6px 10px;font-size:.82rem}
 .chip:active{transform:scale(.94)}
-input[type=text],input[type=date],textarea,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--card);color:var(--ink)}
+input[type=text],input[type=date],input[type=time],textarea,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--card);color:var(--ink)}
 textarea{min-height:70px;resize:vertical}
 .sub{margin-top:8px}
 .btn{padding:11px 16px;border-radius:12px;border:0;background:var(--teal);color:#fff;font-weight:600}
@@ -192,6 +192,9 @@ function load() {
   if (mem.settings.onboarded === undefined) mem.settings.onboarded = existing;   // earlier users skip the welcome
   mem.days = mem.days || {};
   mem.audits = mem.audits || {};
+  mem.duas = mem.duas || [];
+  mem.settings.extras = Object.assign({ fast: true, pages: true, sadaqah: true, sleep: true, dua: true }, mem.settings.extras || {});
+  mem.settings.qadaOwed = mem.settings.qadaOwed || 0;
 }
 let saveTimer;
 function save(quiet) {
@@ -208,7 +211,7 @@ function renderWarn() {
 }
 
 /* ---------- Entries and score ---------- */
-const blank = () => ({ pr: {}, qur: 0, dhikr: false, learn: 0, character: false, charNote: '', kind: false, family: false, exercise: 0, digital: false, repair: false, repairNote: '', notes: '' });
+const blank = () => ({ pr: {}, qur: 0, dhikr: false, learn: 0, character: false, charNote: '', kind: false, family: false, exercise: 0, digital: false, repair: false, repairNote: '', notes: '', fast: '', pages: 0, sadaqah: 0, bed: '', wake: '' });
 const getEntry = k => { const e = Object.assign(blank(), mem.days[k] || {}); e.pr = Object.assign({}, e.pr); return e; };
 function score(e) {
   const L = mem.settings.levels;
@@ -217,7 +220,7 @@ function score(e) {
   HABITS.forEach(h => { if (e[h[0]]) s++; });
   return s;
 }
-const hasEntry = e => PRAYERS.some(p => e.pr[p[0]]) || MINUTES.some(m => e[m[0]]) || HABITS.some(h => e[h[0]]) || e.charNote || e.repairNote || e.notes;
+const hasEntry = e => PRAYERS.some(p => e.pr[p[0]]) || MINUTES.some(m => e[m[0]]) || HABITS.some(h => e[h[0]]) || e.charNote || e.repairNote || e.notes || e.fast || e.pages || e.sadaqah || e.bed || e.wake;
 function putEntry(e) { mem.days[curKey] = e; save(); }
 
 function planInfo() {
@@ -266,6 +269,41 @@ function updateRing(e) {
 }
 const ringMsg = s => s === 0 ? 'Start with one prayer. Small steps count.' : s < 6 ? 'Good start. Keep going.' : s < 11 ? 'Steady day. Well done.' : s < MAX_SCORE ? 'Strong day, almost full.' : 'Full day. Alhamdulillah.';
 
+/* ---------- Extra trackers (do not change the score) ---------- */
+const QURAN_PAGES = 604;
+function sleepHours(e) {
+  if (!e.bed || !e.wake) return 0;
+  const [bh, bm] = e.bed.split(':').map(Number), [wh, wm] = e.wake.split(':').map(Number);
+  let m = (wh * 60 + wm) - (bh * 60 + bm); if (m <= 0) m += 1440;
+  return Math.round(m / 6) / 10;
+}
+function totals() {
+  let qada = 0, practice = 0, pages = 0, sadaqah = 0;
+  Object.keys(mem.days).forEach(k => { const e = getEntry(k); if (e.fast === 'qada') qada++; if (e.fast === 'practice') practice++; pages += e.pages || 0; sadaqah += e.sadaqah || 0; });
+  return { qada, practice, pages, sadaqah };
+}
+function extrasCard(e) {
+  const X = mem.settings.extras, T = totals(), parts = [];
+  if (X.fast) {
+    const owed = mem.settings.qadaOwed, left = Math.max(owed - T.qada, 0);
+    parts.push(`<div class="minute"><span class="lbl">🍽️ Fasted today<small>${owed ? `Qada: ${T.qada} of ${owed} made up, ${left} left` : 'Set qada fasts owed in Settings'}</small></span>
+      <div class="seg" style="min-width:190px">${[['', 'No'], ['practice', 'Practice'], ['qada', 'Qada']].map(([v, l]) => `<button data-fast="${v}" class="${e.fast === v ? 'on' : ''}">${l}</button>`).join('')}</div></div>`);
+  }
+  if (X.pages) {
+    const juz = Math.min(30, Math.floor(T.pages / 20.13));
+    parts.push(`<div class="minute"><span class="lbl">📗 Qur’an pages today<small>Total ${T.pages} of ${QURAN_PAGES} pages, about ${juz} juz</small></span>
+      <input class="val" type="number" inputmode="numeric" min="0" data-cnt="pages" value="${e.pages || ''}" placeholder="0" aria-label="Pages read">
+      <button class="chip" data-inc="pages" data-n="1">+1</button><button class="chip" data-inc="pages" data-n="5">+5</button></div>`);
+  }
+  if (X.sadaqah) parts.push(`<div class="minute"><span class="lbl">💝 Sadaqah given<small>Count only. ${T.sadaqah} so far</small></span>
+      <input class="val" type="number" inputmode="numeric" min="0" data-cnt="sadaqah" value="${e.sadaqah || ''}" placeholder="0" aria-label="Sadaqah count">
+      <button class="chip" data-inc="sadaqah" data-n="1">+1</button></div>`);
+  if (X.sleep) parts.push(`<div class="minute"><span class="lbl">😴 Sleep<small id="sleepHrs">${sleepHours(e) ? sleepHours(e) + ' hours' : 'Bedtime and wake time'}</small></span>
+      <div style="display:flex;gap:8px;width:100%"><label class="muted" style="flex:1">Bed<input type="time" data-txt="bed" value="${e.bed}"></label><label class="muted" style="flex:1">Wake<input type="time" data-txt="wake" value="${e.wake}"></label></div></div>`);
+  if (!parts.length) return '';
+  return `<div class="card"><div class="h">Extra trackers <span class="muted" style="font-weight:400">not scored</span></div>${parts.join('')}</div>`;
+}
+
 function renderToday() {
   const today = todayD(), e = getEntry(curKey), L = mem.settings.levels;
   let strip = '';
@@ -298,6 +336,7 @@ function renderToday() {
     <div class="card"><div class="h">Prayers</div><div class="prayers">${prayers}</div></div>
     <div class="card"><div class="h">Minutes</div>${minutes}</div>
     <div class="card"><div class="h">Habits</div><div class="habits">${habits}</div>${notes}</div>
+    ${extrasCard(e)}
     <div class="card"><div class="h">Notes</div><textarea data-txt="notes" placeholder="Anything about today">${esc(e.notes)}</textarea></div>
     ${promoCard()}`;
 }
@@ -329,6 +368,11 @@ function onTodayClick(ev) {
     const h = HABITS.find(x => x[0] === k);
     if (h[3]) $('#note-' + h[3]).classList.toggle('hide', !e[k]);
     putEntry(e); updateRing(e); refreshStripDot(e);
+  } else if (b.dataset.fast !== undefined) {
+    e.fast = b.dataset.fast; putEntry(e); renderToday(); return;
+  } else if (b.dataset.inc) {
+    const k = b.dataset.inc; e[k] = (e[k] || 0) + Number(b.dataset.n); putEntry(e); refreshStripDot(e);
+    const y = scrollY; renderToday(); scrollTo(0, y); return;
   } else if (b.dataset.add) {
     const k = b.dataset.add; e[k] = (e[k] || 0) + Number(b.dataset.n);
     const inp = document.querySelector(`[data-min="${k}"]`); inp.value = e[k];
@@ -345,8 +389,10 @@ function onTodayInput(ev) {
   if (t.dataset.min) {
     const k = t.dataset.min; e[k] = Math.max(0, Math.round(Number(t.value) || 0));
     t.classList.toggle('hit', e[k] >= TARGETS[k][mem.settings.levels[k]]);
-  } else if (t.dataset.txt) e[t.dataset.txt] = t.value;
+  } else if (t.dataset.cnt) e[t.dataset.cnt] = Math.max(0, Math.round(Number(t.value) || 0));
+  else if (t.dataset.txt) e[t.dataset.txt] = t.value;
   else return;
+  if (t.dataset.txt === 'bed' || t.dataset.txt === 'wake') { const h = sleepHours(e); $('#sleepHrs').textContent = h ? h + ' hours' : 'Bedtime and wake time'; }
   putEntry(e); updateRing(e); refreshStripDot(e);
 }
 function onTodayChange(ev) {
@@ -458,11 +504,25 @@ function renderProgress() {
     <div class="card"><div class="h">Prayer calendar</div>${heatmap(days)}</div>
     <div class="card"><div class="h">Minutes per day</div>${trendSVG(days)}</div>
     <div class="card"><div class="h">Habit strength</div>${habitStrength(days)}</div>
+    ${extrasReport(days)}
     <div class="card"><div class="h">Your four phases</div>${phaseReport()}</div>
     <div class="actions noprint" style="justify-content:center;margin-bottom:8px"><button class="btn ghost" id="printBtn">Print or save as PDF</button></div>`;
   $('#copySum').onclick = () => copyText(summary, $('#sumBox'));
   $('#shareBtn').onclick = () => shareCard(w, r);
   $('#printBtn').onclick = () => window.print();
+}
+function extrasReport(days) {
+  const X = mem.settings.extras, T = totals(), out = [];
+  const bar = (label, v, max, note) => `<div style="padding:6px 0"><strong style="font-size:.9rem">${label}</strong><div class="wk" style="padding:4px 0;cursor:default"><span class="b"><i style="width:${max ? Math.min(100, Math.round(v / max * 100)) : 0}%"></i></span></div><div class="muted">${note}</div></div>`;
+  if (X.fast) { const o = mem.settings.qadaOwed; out.push(o ? bar('🍽️ Qada fasts', T.qada, o, `${T.qada} of ${o} made up. ${T.practice} practice fasts.`) : `<p class="muted">🍽️ ${T.qada} qada and ${T.practice} practice fasts logged.</p>`); }
+  if (X.pages) out.push(bar('📗 Qur’an pages', T.pages, QURAN_PAGES, `${T.pages} of ${QURAN_PAGES} pages, about ${Math.min(30, Math.floor(T.pages / 20.13))} of 30 juz.`));
+  if (X.sadaqah) out.push(`<p class="muted" style="margin:6px 0">💝 Sadaqah given: ${T.sadaqah}.</p>`);
+  if (X.sleep) {
+    const hs = days.slice(-7).map(d => sleepHours(getEntry(ymd(d)))).filter(Boolean);
+    out.push(`<p class="muted" style="margin:6px 0">😴 ${hs.length ? `Average sleep ${(hs.reduce((a, b) => a + b, 0) / hs.length).toFixed(1)} hours over ${hs.length} nights this week.` : 'Log bedtime and wake time to see your sleep.'}</p>`);
+  }
+  if (X.dua) out.push(`<p class="muted" style="margin:6px 0">🤲 ${mem.duas.length} ${mem.duas.length === 1 ? 'dua' : 'duas'} on your Ramadan list.</p>`);
+  return out.length ? `<div class="card"><div class="h">Extra trackers</div>${out.join('')}</div>` : '';
 }
 function onProgressClick(ev) {
   const b = ev.target.closest('[data-open]'); if (!b) return;
@@ -510,7 +570,19 @@ function renderAudit() {
   const qs = AUDIT_QS.map((q, i) => `<div style="margin-bottom:12px"><p style="margin:0 0 6px"><strong>${i + 1}.</strong> ${esc(q)}</p>
     <textarea data-q="${i}">${esc(a[i] || '')}</textarea></div>`).join('');
   $('#v-audit').innerHTML = `<div class="card"><div class="h">Sunday audit <span class="muted" id="auditCount">${done} of 10</span></div>
-    <p class="muted">Week starting ${fmtD(parse(wk))}. Answer honestly, in your own words. Only you see these.</p>${qs}</div>`;
+    <p class="muted">Week starting ${fmtD(parse(wk))}. Answer honestly, in your own words. Only you see these.</p>${qs}</div>
+    ${mem.settings.extras.dua ? duaCard() : ''}`;
+}
+function duaCard() {
+  const list = mem.duas.map((d, i) => `<div class="row"><span class="grow">🤲 ${esc(d.t)}</span><button class="chip" data-deldua="${i}" aria-label="Remove">✕</button></div>`).join('');
+  return `<div class="card"><div class="h">My Ramadan dua list <span class="muted">${mem.duas.length}</span></div>
+    <p class="muted">Build your list over the weeks, so you are ready for the nights of Ramadan.</p>${list}
+    <div class="actions"><input type="text" id="duaIn" placeholder="Add a dua" style="flex:1"><button class="btn" id="duaAdd">Add</button></div></div>`;
+}
+function onAuditClick(ev) {
+  const b = ev.target.closest('button'); if (!b) return;
+  if (b.id === 'duaAdd') { const v = $('#duaIn').value.trim(); if (!v) return; mem.duas.push({ t: v, d: ymd(todayD()) }); save(); renderAudit(); }
+  else if (b.dataset.deldua !== undefined) { if (b.dataset.armed) { mem.duas.splice(Number(b.dataset.deldua), 1); save(); renderAudit(); } else { b.dataset.armed = 1; b.textContent = 'Remove?'; } }
 }
 function onAuditInput(ev) {
   const t = ev.target; if (t.dataset.q === undefined) return;
@@ -528,11 +600,11 @@ function promoCard() {
 const seg = (name, opts, cur) => `<div class="seg" data-seg="${name}">${opts.map(([v, l]) => `<button data-val="${v}" class="${String(cur) === String(v) ? 'on' : ''}">${l}</button>`).join('')}</div>`;
 function csvCell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
 function buildCSV() {
-  const head = ['date', ...PRAYERS.map(p => p[0]), 'quran_min', 'dhikr', 'learning_min', 'character', 'kindness', 'family', 'movement_min', 'digital', 'repair', 'score', 'notes'];
+  const head = ['date', ...PRAYERS.map(p => p[0]), 'quran_min', 'dhikr', 'learning_min', 'character', 'kindness', 'family', 'movement_min', 'digital', 'repair', 'score', 'fast', 'quran_pages', 'sadaqah', 'sleep_hours', 'notes'];
   const yn = v => v ? 'yes' : 'no', lines = [head.join(',')];
   Object.keys(mem.days).sort().forEach(k => {
     const e = getEntry(k); if (!hasEntry(e)) return;
-    lines.push([k, ...PRAYERS.map(p => yn(e.pr[p[0]])), e.qur, yn(e.dhikr), e.learn, yn(e.character), yn(e.kind), yn(e.family), e.exercise, yn(e.digital), yn(e.repair), score(e), e.notes].map(csvCell).join(','));
+    lines.push([k, ...PRAYERS.map(p => yn(e.pr[p[0]])), e.qur, yn(e.dhikr), e.learn, yn(e.character), yn(e.kind), yn(e.family), e.exercise, yn(e.digital), yn(e.repair), score(e), e.fast || 'no', e.pages, e.sadaqah, sleepHours(e) || '', e.notes].map(csvCell).join(','));
   });
   return lines.join('\n');
 }
@@ -544,6 +616,10 @@ function renderSettings() {
       <div class="row"><span class="grow">Plan start</span><input type="date" style="width:auto" data-set="start" value="${s.start}"></div>
       <div class="row"><span class="grow">1 Ramadan</span><input type="date" style="width:auto" data-set="ramadan" value="${s.ramadan}"></div>
       <p class="muted">The plan counts back from 1 Ramadan and is never longer than ${PLAN_DAYS} days. Check the date with your local moon committee. The plan moves when you change it.</p></div>
+    <div class="card"><div class="h">Extra trackers</div>
+      ${[['fast', '🍽️ Fasts (practice and qada)'], ['pages', '📗 Qur’an pages'], ['sadaqah', '💝 Sadaqah'], ['sleep', '😴 Sleep'], ['dua', '🤲 Dua list']].map(([k, n]) => `<div class="row"><span class="grow">${n}</span>${seg('x-' + k, [[1, 'On'], [0, 'Off']], s.extras[k] ? 1 : 0)}</div>`).join('')}
+      <div class="row"><span class="grow">Qada fasts I owe</span><input type="number" min="0" inputmode="numeric" data-set="qadaOwed" value="${s.qadaOwed || ''}" placeholder="0" style="width:90px"></div>
+      <p class="muted">These help you prepare. They do not change your consistency score.</p></div>
     <div class="card"><div class="h">Daily targets</div>
       ${lvl('qur', 'Qur’an')}${lvl('learn', 'Learning')}${lvl('exercise', 'Movement')}
       <p class="muted">Minimum, Standard and Stretch. Pick what you can keep up, not what looks impressive.</p></div>
@@ -625,12 +701,14 @@ function onSettingsClick(ev) {
   const name = b.parentNode.dataset.seg, v = b.dataset.val;
   b.parentNode.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
   if (name.startsWith('lvl-')) mem.settings.levels[name.slice(4)] = Number(v);
+  else if (name.startsWith('x-')) mem.settings.extras[name.slice(2)] = v === '1';
   else if (name === 'theme') { mem.settings.theme = v; applyLook(); }
   else if (name === 'fs') { mem.settings.fs = Number(v); applyLook(); }
   save();
 }
 function onSettingsChange(ev) {
   const t = ev.target;
+  if (t.dataset.set === 'qadaOwed') { mem.settings.qadaOwed = Math.max(0, Math.round(Number(t.value) || 0)); save(); return; }
   if (t.dataset.set && t.value) { mem.settings[t.dataset.set] = t.value; save(); renderHero(); }
 }
 function applyLook() {
@@ -707,6 +785,8 @@ $('#v-today').addEventListener('input', onTodayInput);
 $('#v-today').addEventListener('change', onTodayChange);
 $('#v-progress').addEventListener('click', onProgressClick);
 $('#v-audit').addEventListener('input', onAuditInput);
+$('#v-audit').addEventListener('click', onAuditClick);
+$('#v-audit').addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'duaIn') $('#duaAdd').click(); });
 $('#v-settings').addEventListener('click', onSettingsClick);
 $('#v-settings').addEventListener('change', onSettingsChange);
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyLook);
