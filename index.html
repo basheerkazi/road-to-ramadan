@@ -146,6 +146,8 @@ textarea{min-height:70px;resize:vertical}
 const KEY = 'road-to-ramadan-v1';
 const DEFAULT_RAMADAN = '2027-02-09';   // expected 1 Ramadan 1448 (India). Subject to moon sighting.
 const AHILLA_LINK = '';                 // paste the AHILLA app link here once it is live
+const FEEDBACK_LINK = '';               // Google Form link, feedback section
+const WAITLIST_LINK = '';               // Google Form link, AHILLA waitlist section
 const PLAN_DAYS = 80;
 const PHASES = ['Foundation and awareness', 'Discipline and learning', 'Character and responsibility', 'Ramadan readiness'];
 const LEVEL_NAMES = ['Minimum', 'Standard', 'Stretch'];
@@ -236,6 +238,7 @@ const UR = {
   'Add a dua': 'दुआ लिखें', 'Add': 'जोड़ें', 'Remove': 'हटाएँ', 'Remove?': 'हटाएँ?',
   'From the makers': 'बनाने वालों की तरफ़ से', 'AHILLA app': 'AHILLA ऐप', 'Prayer times, Tahajjud alerts and full Ramadan tools in one app.': 'नमाज़ के औक़ात, तहज्जुद अलर्ट और रमज़ान के सारे टूल्स, एक ही ऐप में।',
   ' Coming soon.': ' जल्द आ रहा है।', 'Open AHILLA': 'AHILLA खोलें',
+  "I'm interested in AHILLA": 'मुझे AHILLA में दिलचस्पी है', 'Share feedback': 'अपनी राय दें', 'Opens a Google Form. Your details are used only for this and never shared.': 'यह Google Form खोलता है। आपकी जानकारी सिर्फ़ इसी काम के लिए है और किसी से शेयर नहीं की जाती।',
   'Your dates': 'आपकी तारीख़ें', 'Plan start': 'प्लान की शुरुआत', '1 Ramadan': '1 रमज़ान',
   'The plan counts back from 1 Ramadan and is never longer than {0} days. Check the date with your local moon committee. The plan moves when you change it.': 'प्लान 1 रमज़ान से पीछे गिना जाता है और {0} दिन से लंबा नहीं होता। तारीख़ अपनी मक़ामी रूयत-ए-हिलाल कमेटी से पक्की करें। तारीख़ बदलेंगे तो प्लान भी बदल जाएगा।',
   'Fasts (practice and qada)': 'रोज़े (नफ़्ल और क़ज़ा)', 'Sadaqah': 'सदक़ा', 'Dua list': 'दुआ लिस्ट', 'On': 'चालू', 'Off': 'बंद', 'Qada fasts I owe': 'मेरे बाक़ी क़ज़ा रोज़े',
@@ -716,7 +719,10 @@ function onAuditInput(ev) {
 function promoCard() {
   return `<div class="card promo"><span class="tag">${T('From the makers')}</span><div class="h" style="margin:0 0 4px">${T('AHILLA app')}</div>
     <p class="muted" style="margin:0">${T('Prayer times, Tahajjud alerts and full Ramadan tools in one app.')}${AHILLA_LINK ? '' : T(' Coming soon.')}</p>
-    ${AHILLA_LINK ? `<div class="actions"><a class="btn" href="${esc(AHILLA_LINK)}" target="_blank" rel="noopener">${T('Open AHILLA')}</a></div>` : ''}</div>`;
+    ${AHILLA_LINK ? `<div class="actions"><a class="btn" href="${esc(AHILLA_LINK)}" target="_blank" rel="noopener">${T('Open AHILLA')}</a></div>` : ''}
+    ${!AHILLA_LINK && WAITLIST_LINK ? `<div class="actions"><a class="btn" href="${esc(WAITLIST_LINK)}" target="_blank" rel="noopener">${T("I'm interested in AHILLA")}</a></div>` : ''}
+    ${FEEDBACK_LINK ? `<div class="actions"><a class="btn ghost" href="${esc(FEEDBACK_LINK)}" target="_blank" rel="noopener">${T('Share feedback')}</a></div>` : ''}
+    ${FEEDBACK_LINK || WAITLIST_LINK ? `<p class="muted" style="margin:8px 0 0;font-size:.8em">${T('Opens a Google Form. Your details are used only for this and never shared.')}</p>` : ''}</div>`;
 }
 const seg = (name, opts, cur) => `<div class="seg" data-seg="${name}">${opts.map(([v, l]) => `<button data-val="${v}" class="${String(cur) === String(v) ? 'on' : ''}">${T(l)}</button>`).join('')}</div>`;
 function csvCell(v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; }
