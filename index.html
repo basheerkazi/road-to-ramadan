@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#164E60">
 <meta name="description" content="Road to Ramadan: a free, private daily planner for the weeks before Ramadan.">
 <title>Road to Ramadan</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <style>
 :root{--teal:#164E60;--teal2:#1f6a80;--gold:#C9A227;--bg:#FBF7EE;--card:#fff;--ink:#1d2b30;--muted:#5f6f74;--line:#e7e0cd;--soft:#eef4f3;--on:#164E60;--onInk:#fff;--danger:#9b2c2c;--fs:16px}
 [data-theme=dark]{--bg:#0f1c20;--card:#172a30;--ink:#e9efee;--muted:#9fb1b4;--line:#264048;--soft:#1d353c;--on:#C9A227;--onInk:#13262b}
@@ -543,8 +547,18 @@ function renderSettings() {
     <div class="card"><div class="h">Look</div>
       <div class="row"><span class="grow">Theme</span>${seg('theme', [['auto', 'Auto'], ['light', 'Light'], ['dark', 'Dark']], s.theme)}</div>
       <div class="row"><span class="grow">Text size</span>${seg('fs', [[15, 'A'], [16, 'A+'], [18, 'A++']], s.fs)}</div></div>
+    <div class="card"><div class="h">Install as an app</div>
+      <p class="muted" id="instMsg">${installMsg()}</p>
+      <div class="actions"><button class="btn ${deferredInstall ? '' : 'hide'}" id="instBtn">Install Road to Ramadan</button></div></div>
+    <div class="card"><div class="h">Daily reminder</div>
+      <p class="muted">Adds a repeating daily reminder to your phone calendar, until Ramadan. Pick a time, then open the file.</p>
+      <div class="row"><span class="grow">Time</span><input type="time" id="remTime" value="${s.remTime || '21:00'}" style="width:auto;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit"></div>
+      <div class="actions"><button class="btn ghost" id="remBtn">Add to calendar</button></div></div>
     <div class="card"><div class="h">Your data</div>
-      <p class="muted">Everything stays on this device. Export a copy for your records.</p>
+      <p class="muted">Everything stays on this device. Save a backup file before you change or reset your phone, then restore it on the new one.</p>
+      <div class="actions"><button class="btn" id="bkBtn">Save backup</button><button class="btn ghost" id="rsBtn">Restore backup</button>
+        <input type="file" id="rsFile" accept=".json,application/json" class="hide"></div>
+      <p class="muted" id="bkMsg">${s.lastBackup ? 'Last backup: ' + fmtD(parse(s.lastBackup)) : 'No backup saved yet.'}</p>
       <div class="actions"><button class="btn ghost" id="csvBtn">Show export (CSV)</button></div>
       <textarea id="csvBox" class="hide" style="margin-top:10px;min-height:140px" readonly></textarea>
       <div class="actions"><button class="btn hide" id="copyCsv">Copy CSV</button></div></div>
@@ -558,7 +572,51 @@ function renderSettings() {
   $('#clearDay').onclick = () => { if (!aD) { aD = true; $('#clearMsg').textContent = `Tap again to clear ${fmtD(parse(curKey))}.`; return; } delete mem.days[curKey]; save(true); aD = false; $('#clearMsg').textContent = 'Day cleared.'; };
   $('#clearAll').onclick = () => { if (!aA) { aA = true; $('#clearMsg').textContent = 'Tap again to erase every entry on this device.'; return; } mem.days = {}; mem.audits = {}; save(true); aA = false; $('#clearMsg').textContent = 'Everything cleared.'; };
   $('#redoOb').onclick = () => openOnboarding();
+  $('#instBtn').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; renderSettings(); };
+  $('#remBtn').onclick = () => { mem.settings.remTime = $('#remTime').value || '21:00'; save(true); saveFile(buildICS(mem.settings.remTime), 'road-to-ramadan-reminder.ics', 'text/calendar'); };
+  $('#bkBtn').onclick = () => { mem.settings.lastBackup = ymd(todayD()); save(true); saveFile(JSON.stringify(mem, null, 1), `road-to-ramadan-backup-${ymd(todayD())}.json`, 'application/json'); $('#bkMsg').textContent = 'Backup saved. Keep the file somewhere safe, such as Google Drive.'; };
+  $('#rsBtn').onclick = () => $('#rsFile').click();
+  $('#rsFile').onchange = ev => restoreBackup(ev.target.files[0]);
 }
+let deferredInstall = null;
+const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+function installMsg() {
+  if (isStandalone()) return 'Installed. You are using the app version.';
+  if (deferredInstall) return 'Add it to your home screen or desktop. It opens like an app and works offline.';
+  if (/iphone|ipad/i.test(navigator.userAgent)) return 'On iPhone: tap the Share button in Safari, then “Add to Home Screen”.';
+  return 'In Chrome or Edge, open the browser menu and choose “Install app” or “Add to Home screen”.';
+}
+function saveFile(text, name, type) {
+  const blob = new Blob([text], { type }), file = new File([blob], name, { type });
+  const fallback = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); toast('File saved'); };
+  try { if (navigator.canShare && navigator.canShare({ files: [file] }) && /android|iphone|ipad/i.test(navigator.userAgent)) { navigator.share({ files: [file], title: name }).catch(e => { if (e.name !== 'AbortError') fallback(); }); return; } } catch (e) {}
+  fallback();
+}
+function restoreBackup(f) {
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    let d; try { d = JSON.parse(r.result); } catch (e) { d = null; }
+    if (!d || typeof d !== 'object' || !d.days || !d.settings) { $('#bkMsg').textContent = 'That file is not a Road to Ramadan backup.'; return; }
+    const n = Object.keys(d.days).length;
+    if (!confirm(`Restore ${n} days from this backup? It replaces what is on this device now.`)) return;
+    mem = d; save(true); load(); applyLook(); renderHero(); renderSettings(); toast(`Restored ${n} days`);
+  };
+  r.readAsText(f);
+}
+function buildICS(t) {
+  const [hh, mm] = t.split(':'), st = todayD(), until = mem.settings.ramadan.replace(/-/g, '');
+  const dt = ymd(st).replace(/-/g, '') + 'T' + hh + mm + '00';
+  const url = location.protocol.startsWith('http') ? location.href.split('#')[0] : 'https://basheerkazi.github.io/road-to-ramadan/';
+  return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Road to Ramadan//EN', 'BEGIN:VEVENT', 'UID:rtr-daily-' + Date.now() + '@road-to-ramadan',
+    'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z', 'DTSTART:' + dt, 'DURATION:PT10M',
+    'RRULE:FREQ=DAILY;UNTIL=' + until + 'T235959', 'SUMMARY:Road to Ramadan check-in', 'DESCRIPTION:Two minutes to log today. ' + url, 'URL:' + url,
+    'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:Road to Ramadan check-in', 'TRIGGER:PT0M', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+}
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; if (view === 'settings') renderSettings(); });
+window.addEventListener('appinstalled', () => { deferredInstall = null; toast('Installed'); });
+if ('serviceWorker' in navigator && location.protocol === 'https:') { try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {} }
+
 function onSettingsClick(ev) {
   const b = ev.target.closest('.seg button'); if (!b) return;
   const name = b.parentNode.dataset.seg, v = b.dataset.val;
