@@ -1,7 +1,7 @@
 {
   "name": "Road to Ramadan",
   "short_name": "Road to Ramadan",
-  "description": "A free, private daily planner for the weeks before Ramadan.",
+  "description": "By Basheer Kazi, Growth with Purpose. A free, private daily planner for the weeks before Ramadan.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
